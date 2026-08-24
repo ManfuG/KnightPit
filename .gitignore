@@ -1,0 +1,49 @@
+# OS/editor and local environment files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+.env
+.env.*
+!.env.example
+
+# Frontend dependencies and builds
+node_modules/
+dist/
+.vite/
+*.log
+
+# Python environments and caches
+KnightPitAI/.venv/
+KnightPitAI/venv/
+KnightPitAI/__pycache__/
+KnightPitAI/**/__pycache__/
+KnightPitAI/.pytest_cache/
+KnightPitAI/**/.pytest_cache/
+KnightPitAI/.mypy_cache/
+KnightPitAI/**/*.egg-info/
+*.pyc
+.coverage
+
+
+# Generated self-play, campaign and model artifacts
+KnightPitAI/data/generated/*
+!KnightPitAI/data/generated/.gitkeep
+KnightPitAI/checkpoints/*
+!KnightPitAI/checkpoints/.gitkeep
+KnightPitAI/exports/*
+!KnightPitAI/exports/.gitkeep
+KnightPitAI/.campaign-smoke/
+KnightPitAI/**/campaign-*/
+KnightPitAI/**/*.npz
+KnightPitAI/**/*.jsonl
+KnightPitAI/**/*.manifest.json
+KnightPitAI/**/*.log
+KnightPitAI/.campaign-*/
+KnightPitAI/.reward-*/
+KnightPitAI/.stats-*/
+KnightPitAI/**/interrupted.npz
+
+
+# Keep public output directories as placeholders
+!**/.gitkeep

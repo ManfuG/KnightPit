@@ -1,0 +1,20 @@
+[
+  {
+    "name": "mate-in-one",
+    "fen": "7k/5Q2/6K1/8/8/8/8/8 w - - 0 1",
+    "expected_move": "f7g7",
+    "purpose": "The inference must select the forced mate-in-one move."
+  },
+  {
+    "name": "material-capture",
+    "fen": "6k1/8/8/8/8/8/3q4/3QK3 w - - 0 1",
+    "expected_move": "d1d2",
+    "purpose": "The inference must select the material capture."
+  },
+  {
+    "name": "promotion",
+    "fen": "7k/P7/8/8/8/8/6K1/8 w - - 0 1",
+    "expected_move": "a7a8q",
+    "purpose": "The inference must select the queen promotion."
+  }
+]

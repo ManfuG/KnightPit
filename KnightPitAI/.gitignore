@@ -1,0 +1,26 @@
+.venv/
+venv/
+__pycache__/
+.pytest_cache/
+*.py[cod]
+*.egg-info/
+.mypy_cache/
+.coverage
+.DS_Store
+.env
+.env.*
+!.env.example
+.campaign-*/
+.reward-*/
+.stats-*/
+
+# Generated training artifacts: keep only directory placeholders.
+data/generated/*
+!data/generated/.gitkeep
+checkpoints/*
+!checkpoints/.gitkeep
+exports/*
+!exports/.gitkeep
+*.npz
+*.jsonl
+*.log
