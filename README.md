@@ -29,6 +29,12 @@ scripts/dev.mjs            Starts the local AI API and Vite together
 public/pieces/spatial/     Third-party chess piece assets
 .github/workflows/         Continuous integration
 ```
+## Requirements
+
+- Node.js 20 or newer.
+- Python 3.10 or newer.
+- No CUDA-capable GPU is required.
+
 
 ## Quick start
 

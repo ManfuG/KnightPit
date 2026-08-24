@@ -5,9 +5,8 @@ KnightPit and KnightPitAI project-owned source code, tests, configuration, and p
 The project was developed with GPT-5.6-Luna using Oh My Pi as the coding harness. This workflow disclosure does not change any copyright, license, or upstream attribution.
 
 ## Audit record
-
-- Source of truth: `package-lock.json` resolved package entries and `KnightPitAI/requirements-*.lock` generated with `uv pip compile --generate-hashes`.
-- Audit date: 2026-08-23.
+- Audit date: 2026-08-24.
+- Source of truth: `package-lock.json`, `requirements-cpu.lock`, and `requirements-test.lock`.
 - Frontend lockfile registry: npm registry package tarballs and their upstream package metadata.
 - Python lockfile interpreter used for metadata audit: Python 3.10.4.
 
@@ -33,7 +32,7 @@ The lockfile also resolves transitive build/runtime packages. The following non-
 
 ## Chess piece assets
 
-`public/pieces/spatial/*.svg` contains the Spatial chess piece set by Maurizio Monge, sourced from [maurimo/chess-art](https://github.com/maurimo/chess-art) and the corresponding MIT-listed Lichess asset set. These files remain third-party assets and are not relicensed as KnightPit source code. The complete license text is also kept in `public/pieces/spatial/LICENSE`.
+`public/pieces/spatial/*.svg` contains adapted Spatial chess piece artwork by Maurizio Monge, sourced from [maurimo/chess-art](https://github.com/maurimo/chess-art). The SVGs are color-customized and compacted for the frontend, but remain third-party assets and are not relicensed as KnightPit source code. The upstream repository publishes the artwork under the MIT License; the complete attribution and license text is kept in `public/pieces/spatial/LICENSE`.
 
 MIT License
 
@@ -65,8 +64,8 @@ Resolved from the hashed lockfiles (package, version, license, role, provenance)
 | --- | --- | --- | --- | --- |
 | numpy | 2.2.6 | BSD-3-Clause (binary distributions may bundle additional notices) | network, encoding, training | https://pypi.org/project/numpy/2.2.6/ |
 | fastapi | 0.141.1 | MIT | local API | https://pypi.org/project/fastapi/0.141.1/ |
-| uvicorn | 0.51.0 | BSD-3-Clause | local ASGI server | https://pypi.org/project/uvicorn/0.51.0/ |
-| pytest | 8.4.2 | MIT | test runner | https://pypi.org/project/pytest/8.4.2/ |
+| uvicorn | 0.52.4 | BSD-3-Clause | local ASGI server | https://pypi.org/project/uvicorn/0.52.4/ |
+| pytest | 9.1.1 | MIT | test runner | https://pypi.org/project/pytest/9.1.1/ |
 | httpx | 0.28.1 | BSD-3-Clause | API tests/client | https://pypi.org/project/httpx/0.28.1/ |
 | pydantic | 2.13.4 | MIT | FastAPI validation | https://pypi.org/project/pydantic/2.13.4/ |
 | starlette | 1.6.0 | BSD-3-Clause | ASGI framework | https://pypi.org/project/starlette/1.6.0/ |

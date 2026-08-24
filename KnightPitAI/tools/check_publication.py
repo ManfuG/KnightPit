@@ -15,6 +15,7 @@ SKIP_DIRS = {
     "node_modules",
     "dist",
     ".mypy_cache",
+    ".egg-info",
     "graphify-out",
 }
 ALLOWED_ARTIFACT_ROOTS = {
