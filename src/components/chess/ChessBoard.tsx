@@ -13,18 +13,13 @@ export type ChessBoardProps = {
 
 export type PieceGlyphType = NonNullable<Position["board"][number]>["type"];
 
-export const PIECE_GLYPHS: Record<PieceGlyphType, string> = {
-  king: "K",
-  queen: "Q",
-  rook: "R",
-  bishop: "B",
-  knight: "N",
-  pawn: "P",
+export const PIECE_GLYPHS: Record<Color, Record<PieceGlyphType, string>> = {
+  white: { king: "♔", queen: "♕", rook: "♖", bishop: "♗", knight: "♘", pawn: "♙" },
+  black: { king: "♚", queen: "♛", rook: "♜", bishop: "♝", knight: "♞", pawn: "♟" },
 };
 
 export function PieceGlyph({ type, color }: { type: PieceGlyphType; color: Color }) {
-  const side = color === "white" ? "w" : "b";
-  return <img className="piece-svg" src={`/pieces/spatial/${side}${PIECE_GLYPHS[type]}.svg`} alt="" aria-hidden="true" draggable={false} />;
+  return <span className="piece-glyph" aria-hidden="true">{PIECE_GLYPHS[color][type]}</span>;
 }
 
 const files = ["a", "b", "c", "d", "e", "f", "g", "h"];

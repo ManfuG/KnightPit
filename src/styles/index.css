@@ -108,9 +108,9 @@ button:disabled, input:disabled, textarea:disabled, select:disabled { cursor: no
 .square { position: relative; display: grid; aspect-ratio: 1; place-items: center; background: #c9bea6; color: #29281f; font-family: "Segoe UI Symbol", "Noto Sans Symbols 2", "Arial Unicode MS", serif; font-size: clamp(1.45rem, 4vw, 3.2rem); line-height: 1; }
 .square.dark { background: #536857; color: #e8e5d8; }
 .piece { position: relative; z-index: 1; display: inline-flex; width: .9em; height: .9em; align-items: center; justify-content: center; color: inherit; }
-.piece-svg { display: block; width: 100%; height: 100%; object-fit: contain; }
-.piece-white { color: #fff7df; }
-.piece-black { color: #111815; }
+.piece-glyph { display: block; font-family: "Segoe UI Symbol", "Noto Sans Symbols 2", "Arial Unicode MS", serif; font-size: clamp(2.45rem, 6.8vw, 4.5rem); line-height: .86; }
+.piece-white { color: #fff7df; text-shadow: 0 1px 0 rgba(24, 45, 34, .42); }
+.piece-black { color: #111815; text-shadow: 0 1px 0 rgba(255, 255, 255, .16); }
 .square.dark .piece { filter: none; }
 .coordinate { position: absolute; z-index: 2; left: 4px; bottom: 3px; color: rgba(24, 45, 34, .54); font-family: Inter, sans-serif; font-size: clamp(.46rem, 1vw, .62rem); font-weight: 800; line-height: 1; }
 .square.dark .coordinate { color: rgba(231, 243, 228, .6); }

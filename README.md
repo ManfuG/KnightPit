@@ -26,7 +26,7 @@ src/                       React application and chess UI
 KnightPitAI/src/           Python chess environment, model, MCTS, training, and API
 KnightPitAI/tests/         Backend and AI tests
 scripts/dev.mjs            Starts the local AI API and Vite together
-public/pieces/spatial/     Third-party chess piece assets
+src/components/chess/    Chess board and Unicode piece glyphs
 .github/workflows/         Continuous integration
 ```
 ## Requirements

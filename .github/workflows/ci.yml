@@ -22,6 +22,9 @@ jobs:
       - name: Python tests
         working-directory: KnightPitAI
         run: python -m pytest
+      - name: Prepare generated output directories
+        working-directory: KnightPitAI
+        run: python -c "from pathlib import Path; Path('data/generated').mkdir(parents=True, exist_ok=True)"
       - name: Self-play smoke
         working-directory: KnightPitAI
         run: python -m knightpit_ai self-play --games 2 --simulations 2 --max-ply 24 --seed 42 --output data/generated/ci-smoke.jsonl

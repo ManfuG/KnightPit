@@ -30,33 +30,6 @@ Direct packages resolved in `package-lock.json` (version, license, role, provena
 
 The lockfile also resolves transitive build/runtime packages. The following non-MIT licenses are called out explicitly and remain applicable: `caniuse-lite@1.0.30001809` CC-BY-4.0 (browser data), `lightningcss@1.32.0` and its platform packages MPL-2.0 (CSS compiler), `baseline-browser-mapping@2.11.18` Apache-2.0, `detect-libc@2.1.2` Apache-2.0, `electron-to-chromium@1.5.412` ISC, `graceful-fs@4.2.11` ISC, `lru-cache@5.1.1` ISC, `picocolors@1.1.1` ISC, `semver@6.3.1` ISC, `yallist@3.1.1` ISC, `source-map-js@1.2.1` BSD-3-Clause, and `tslib@2.8.1` 0BSD. Other resolved transitive packages are identified by name, version, integrity hash, and registry URL in `package-lock.json`; their upstream license metadata is not collapsed to MIT.
 
-## Chess piece assets
-
-`public/pieces/spatial/*.svg` contains adapted Spatial chess piece artwork by Maurizio Monge, sourced from [maurimo/chess-art](https://github.com/maurimo/chess-art). The SVGs are color-customized and compacted for the frontend, but remain third-party assets and are not relicensed as KnightPit source code. The upstream repository publishes the artwork under the MIT License; the complete attribution and license text is kept in `public/pieces/spatial/LICENSE`.
-
-Provenance note: the upstream SVG files contain legacy embedded GPL-2.0 metadata, while the upstream repository's current `LICENSE` and README explicitly state that the artwork is released under MIT. KnightPit relies on that current repository-level MIT grant and preserves the author's attribution. If an unambiguous single-license provenance chain is required, replace these assets or obtain written confirmation from the author.
-
-MIT License
-
-Copyright (c) Maurizio Monge
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
 
 ## Python inventory
 
