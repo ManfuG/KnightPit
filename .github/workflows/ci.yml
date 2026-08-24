@@ -27,6 +27,8 @@ jobs:
         run: python -c "from pathlib import Path; Path('data/generated').mkdir(parents=True, exist_ok=True)"
       - name: Self-play smoke
         working-directory: KnightPitAI
+        env:
+          PYTHONPATH: src
         run: python -m knightpit_ai self-play --games 2 --simulations 2 --max-ply 24 --seed 42 --output data/generated/ci-smoke.jsonl
       - name: Publication audit
         working-directory: KnightPitAI
