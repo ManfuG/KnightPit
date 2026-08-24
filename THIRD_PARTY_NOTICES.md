@@ -34,6 +34,8 @@ The lockfile also resolves transitive build/runtime packages. The following non-
 
 `public/pieces/spatial/*.svg` contains adapted Spatial chess piece artwork by Maurizio Monge, sourced from [maurimo/chess-art](https://github.com/maurimo/chess-art). The SVGs are color-customized and compacted for the frontend, but remain third-party assets and are not relicensed as KnightPit source code. The upstream repository publishes the artwork under the MIT License; the complete attribution and license text is kept in `public/pieces/spatial/LICENSE`.
 
+Provenance note: the upstream SVG files contain legacy embedded GPL-2.0 metadata, while the upstream repository's current `LICENSE` and README explicitly state that the artwork is released under MIT. KnightPit relies on that current repository-level MIT grant and preserves the author's attribution. If an unambiguous single-license provenance chain is required, replace these assets or obtain written confirmation from the author.
+
 MIT License
 
 Copyright (c) Maurizio Monge
