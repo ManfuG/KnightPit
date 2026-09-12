@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { spawn, spawnSync } from "node:child_process";
 import { createHash } from "node:crypto";
-import { cpSync, existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, statSync, symlinkSync, writeFileSync } from "node:fs";
+import { cpSync, existsSync, mkdirSync, mkdtempSync, readFileSync, realpathSync, rmSync, statSync, symlinkSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -21,6 +21,14 @@ function fixture() {
   }
   // Only npm dependencies are shared; no local Python, model, replay, or .env state is copied.
   symlinkSync(join(root, "node_modules"), join(directory, "node_modules"), process.platform === "win32" ? "junction" : "dir");
+  if (process.platform === "win32") {
+    // Runner TEMP paths may use 8.3 aliases; these must not trigger Vite's 403 guard.
+    const shortPath = spawnSync("cmd.exe", ["/d", "/c", 'for %I in ("%KNIGHTPIT_TEST_DIR%") do @echo %~sI'], {
+      windowsVerbatimArguments: true, encoding: "utf8", env: { ...process.env, KNIGHTPIT_TEST_DIR: directory },
+    });
+    assert.equal(shortPath.status, 0, shortPath.stderr);
+    return shortPath.stdout.trim();
+  }
   return directory;
 }
 
@@ -87,7 +95,8 @@ test("fresh checkout starts, plays, reuses artifacts offline, and honors overrid
     const health = await (await fetch("http://127.0.0.1:8000/health")).json();
     assert.equal(health.model_loaded, true);
     assert.equal(health.model_version, "development-seed-42");
-    assert.equal((await fetch("http://127.0.0.1:5173")).status, 200);
+    const page = await fetch("http://127.0.0.1:5173");
+    assert.equal(page.status, 200, `${await page.text()}\n${server.output()}`);
     const reply = await predict("http://127.0.0.1:8000", ["e2e4"]);
     // Applying the model's reply in a subsequent request independently checks its legality.
     await predict("http://127.0.0.1:8000", ["e2e4", reply.move]);
@@ -163,7 +172,7 @@ test("fresh checkout starts, plays, reuses artifacts offline, and honors overrid
   assert.equal(unavailableDependencies.status, 1);
   assert.match(unavailableDependencies.stderr, /--require-hashes/);
   assert.match(unavailableDependencies.stderr, /--only-binary=:all:/);
-  assert.ok(unavailableDependencies.stderr.includes(join(remote, "KnightPitAI/requirements-cpu.lock")));
+  assert.ok(unavailableDependencies.stderr.includes(join(realpathSync.native(remote), "KnightPitAI/requirements-cpu.lock")));
   const repaired = bootstrap(remote, { PATH: "" });
   assert.equal(repaired.status, 0, repaired.stdout + repaired.stderr);
   assert.equal(digest(join(remote, checkpointPath)), originalHash);

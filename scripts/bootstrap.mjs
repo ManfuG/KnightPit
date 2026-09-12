@@ -1,10 +1,11 @@
 import { spawnSync } from "node:child_process";
-import { existsSync, readFileSync } from "node:fs";
+import { existsSync, readFileSync, realpathSync } from "node:fs";
 import { delimiter, dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { loadEnv } from "vite";
 
-export const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
+// Vite's filesystem guard requires the long path, not a Windows 8.3 alias.
+export const root = realpathSync.native(resolve(dirname(fileURLToPath(import.meta.url)), ".."));
 const aiRoot = join(root, "KnightPitAI");
 const venv = join(aiRoot, ".venv");
 const pythonIn = (directory) => join(directory, process.platform === "win32" ? "Scripts/python.exe" : "bin/python");
