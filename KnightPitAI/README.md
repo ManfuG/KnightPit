@@ -12,13 +12,18 @@ The project does not include Stockfish, another external chess engine, tablebase
 
 ## Reproducible installation
 
-Python 3.10 or newer is required. The lockfiles were generated with hashed requirements:
+The locked CPU runtime supports Python **3.10–3.13**. For the integrated application, run `npm install` then `npm run dev` from the repository root: the launcher prepares a reusable environment and a seed-42 development checkpoint automatically. `npm run bootstrap` prepares them without starting servers; no environment activation is required. See the [root quick start](../README.md#quick-start) for prerequisites, recovery commands, and overrides.
+
+For manual backend installation, the lockfiles were generated with hashed requirements:
 
 ```powershell
 python -m venv .venv
 .venv\Scripts\Activate.ps1
 python -m pip install --require-hashes -r requirements-cpu.lock
+$env:PYTHONPATH = "$PWD/src"
 ```
+
+On POSIX, activate with `. .venv/bin/activate` and use `export PYTHONPATH="$PWD/src"`. Run manual backend commands below from this directory.
 
 Install the test dependencies when working on the package:
 
@@ -66,7 +71,7 @@ python -m knightpit_ai train-campaign --minutes 60 --seed 42 --reward-profile pr
 python -m knightpit_ai train-campaign --minutes 60 --seed 42 --reward-profile principles-v1 --output-dir data/generated/campaign-60m --resume
 ```
 
-A short deterministic smoke campaign is enough to prepare the integrated frontend:
+Integrated development does not require a campaign: the root launcher creates a small **untrained** seeded checkpoint only when no existing model is available. Training remains optional; to run a short smoke campaign manually:
 
 ```powershell
 python -m knightpit_ai train-campaign --minutes 0.1 --games-per-iteration 2 --simulations 2 --max-ply 24 --eval-games 4 --seed 42 --output-dir .campaign-smoke

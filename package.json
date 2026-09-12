@@ -5,6 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "node scripts/dev.mjs",
+    "bootstrap": "node scripts/bootstrap.mjs",
+    "test:startup": "node --test scripts/dev.test.mjs",
     "dev:frontend": "vite",
     "build": "tsc -b && vite build",
     "preview": "vite preview"

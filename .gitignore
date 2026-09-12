@@ -22,6 +22,8 @@ KnightPitAI/.pytest_cache/
 KnightPitAI/**/.pytest_cache/
 KnightPitAI/.mypy_cache/
 KnightPitAI/**/*.egg-info/
+KnightPitAI/.cache/
+KnightPitAI/**/.cache/
 *.pyc
 .coverage
 

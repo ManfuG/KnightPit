@@ -1,120 +1,77 @@
-import { spawn, spawnSync } from "node:child_process";
-import { existsSync } from "node:fs";
-import { dirname, join, resolve } from "node:path";
-import { fileURLToPath } from "node:url";
+import { spawn } from "node:child_process";
+import { createServer } from "vite";
+import { aiEnv, bootstrap, remoteAiUrl, root } from "./bootstrap.mjs";
 
-const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
-const aiRoot = join(root, "KnightPitAI");
-const aiSource = join(aiRoot, "src");
-const checkpointOverride = process.env.KNIGHTPIT_CHECKPOINT;
-const checkpointCandidates = [
-  checkpointOverride,
-  join(aiRoot, ".campaign-smoke", "champion.npz"),
-  join(aiRoot, "data", "generated", "campaign-60m", "candidate-iteration-1.npz"),
-  join(aiRoot, "data", "generated", "campaign-60m", "candidate-iteration-2.npz"),
-  join(aiRoot, "data", "generated", "campaign-60m", "champion.npz"),
-  join(aiRoot, "checkpoints", "knightpit-epoch-0001.npz"),
-].filter(Boolean).map((path) => resolve(root, path));
-const checkpoint = checkpointCandidates.find((path) => existsSync(path));
-
-if (!checkpoint) {
-  console.error("KnightPitAI checkpoint not found.");
-  console.error("Run the campaign first or set KNIGHTPIT_CHECKPOINT to a .npz file.");
-  process.exit(1);
-}
-
-function hasAiDependencies(command, args = []) {
-  return spawnSync(command, [...args, "-c", "import numpy, fastapi"], { stdio: "ignore" }).status === 0;
-}
-function findPython() {
-  const venvPython = process.platform === "win32" ? join(aiRoot, ".venv", "Scripts", "python.exe") : join(aiRoot, ".venv", "bin", "python");
-  if (existsSync(venvPython) && hasAiDependencies(venvPython)) return { command: venvPython, args: [] };
-  if (hasAiDependencies("python")) return { command: "python", args: [] };
-  if (process.platform === "win32" && hasAiDependencies("py", ["-3"])) return { command: "py", args: ["-3"] };
-  return null;
-}
-
-
-async function waitForHealth(url, timeoutMs = 30_000) {
-  const deadline = Date.now() + timeoutMs;
-  while (Date.now() < deadline) {
-    try {
-      const response = await fetch(url, { signal: AbortSignal.timeout(1_000) });
-      if (response.ok) return;
-    } catch {
-      // The API may still be loading its checkpoint.
-    }
-    await new Promise((resolveRetry) => setTimeout(resolveRetry, 250));
-  }
-  throw new Error(`AI health check timed out at ${url}`);
-}
-
-const python = findPython();
-if (!python) {
-  console.error("Python with NumPy and FastAPI is required. Install KnightPitAI/requirements-cpu.lock first.");
-  process.exit(1);
-}
-const ai = spawn(
-  python.command,
-  [...python.args, "-m", "knightpit_ai.api"],
-  {
-    cwd: aiRoot,
-    env: {
-      ...process.env,
-      PYTHONPATH: [aiSource, process.env.PYTHONPATH].filter(Boolean).join(process.platform === "win32" ? ";" : ":"),
-      KNIGHTPIT_CHECKPOINT: checkpoint,
-    },
-    stdio: "inherit",
-    windowsHide: false,
-  },
-);
-
+let ai;
 let frontend;
 let shuttingDown = false;
 
-function shutdown(code = 0) {
+async function shutdown(code = 0) {
   if (shuttingDown) return;
   shuttingDown = true;
-  if (frontend && !frontend.killed) frontend.kill("SIGTERM");
-  if (!ai.killed) ai.kill("SIGTERM");
-  setTimeout(() => process.exit(code), 250);
+  await frontend?.close();
+  if (ai?.pid && ai.exitCode === null && ai.signalCode === null) {
+    const exited = new Promise((resolve) => ai.once("exit", resolve));
+    ai.kill("SIGTERM");
+    const timer = setTimeout(() => ai.kill("SIGKILL"), 3_000);
+    await exited;
+    clearTimeout(timer);
+  }
+  process.exit(code);
 }
 
-ai.once("error", (error) => {
-  console.error(`Unable to start KnightPitAI: ${error.message}`);
-  shutdown(1);
-});
-ai.once("exit", (code) => {
-  if (!shuttingDown && code !== 0) {
-    console.error(`KnightPitAI exited with code ${code ?? "unknown"}.`);
-    shutdown(code || 1);
+process.on("SIGINT", () => void shutdown(0));
+process.on("SIGTERM", () => void shutdown(0));
+
+async function waitForHealth(url) {
+  const deadline = Date.now() + 30_000;
+  let detail = "service unreachable";
+  while (Date.now() < deadline && !shuttingDown) {
+    try {
+      const response = await fetch(`${url}/health`, { signal: AbortSignal.timeout(1_000) });
+      const health = await response.json();
+      if (response.ok && health.status === "ok" && health.model_loaded === true) return;
+      detail = `HTTP ${response.status}, model_loaded=${health.model_loaded}`;
+    } catch (error) {
+      detail = error.message;
+    }
+    await new Promise((resolve) => setTimeout(resolve, 250));
   }
-});
+  throw new Error(`AI health check failed at ${url}/health: ${detail}.\n${remoteAiUrl ? "Start the configured AI service with a loaded checkpoint, or remove VITE_AI_URL from your shell/.env files for local bootstrap." : "Check the API error above and free the configured API port."}\nRetry: npm run dev\nFrontend only: npm run dev:frontend`);
+}
 
 try {
-  await waitForHealth("http://127.0.0.1:8000/health");
-  const frontendCommand = process.platform === "win32" ? "cmd.exe" : "npm";
-  const frontendArgs = process.platform === "win32"
-    ? ["/d", "/s", "/c", "npm run dev:frontend -- --host 127.0.0.1"]
-    : ["run", "dev:frontend", "--", "--host", "127.0.0.1"];
-  frontend = spawn(frontendCommand, frontendArgs, {
-    cwd: root,
-    env: process.env,
-    stdio: "inherit",
-    windowsHide: false,
-  });
-  frontend.once("error", (error) => {
-    console.error(`Unable to start Vite: ${error.message}`);
-    shutdown(1);
-  });
-  frontend.once("exit", (code) => {
-    if (!shuttingDown) shutdown(code || 0);
-  });
-  console.log(`KnightPitAI ready with ${checkpoint}`);
+  const local = bootstrap();
+  const aiUrl = (remoteAiUrl || `http://127.0.0.1:${process.env.KNIGHTPIT_API_PORT || "8000"}`).replace(/\/$/, "");
+  if (local) {
+    ai = spawn(local.python.command, [...local.python.args, "-m", "knightpit_ai.api"], {
+      cwd: root,
+      env: { ...aiEnv, KNIGHTPIT_CHECKPOINT: local.checkpoint },
+      stdio: "inherit",
+    });
+    ai.once("error", (error) => {
+      console.error(`Unable to start KnightPitAI: ${error.message}\nRun: npm run bootstrap\nThen: npm run dev`);
+      void shutdown(1);
+    });
+    ai.once("exit", (code) => {
+      if (!shuttingDown) {
+        console.error(`KnightPitAI exited with code ${code ?? "unknown"}. Check the API error above.\nRetry: npm run dev`);
+        void shutdown(code || 1);
+      }
+    });
+  }
+  await waitForHealth(aiUrl);
+  if (!shuttingDown) {
+    frontend = await createServer({
+      root,
+      server: { host: "127.0.0.1", port: 5173, strictPort: true },
+      define: { "import.meta.env.VITE_AI_URL": JSON.stringify(aiUrl) },
+    });
+    await frontend.listen();
+    console.log(`KnightPitAI ready at ${aiUrl}${local ? ` with ${local.checkpoint}` : ""}`);
+    frontend.printUrls();
+  }
 } catch (error) {
-  console.error(error instanceof Error ? error.message : error);
-  shutdown(1);
+  console.error(`${error.message}\nAfter correcting the error, run: npm run dev`);
+  await shutdown(1);
 }
-
-process.on("SIGINT", () => shutdown(0));
-process.on("SIGTERM", () => shutdown(0));
