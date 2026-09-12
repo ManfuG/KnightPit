@@ -15,7 +15,7 @@ const digest = (path) => createHash("sha256").update(readFileSync(path)).digest(
 
 function fixture() {
   const directory = mkdtempSync(join(tmpdir(), "knightpit fresh checkout "));
-  for (const path of ["scripts", "src", "public", "index.html", "vite.config.ts", "package.json", "KnightPitAI/src", "KnightPitAI/tools", "KnightPitAI/requirements-cpu.lock"]) {
+  for (const path of ["scripts", "src", "index.html", "vite.config.ts", "package.json", "KnightPitAI/src", "KnightPitAI/tools", "KnightPitAI/requirements-cpu.lock"]) {
     mkdirSync(dirname(join(directory, path)), { recursive: true });
     cpSync(join(root, path), join(directory, path), { recursive: true, filter: (source) => !source.includes("__pycache__") });
   }
