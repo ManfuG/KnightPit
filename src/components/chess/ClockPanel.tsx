@@ -7,7 +7,7 @@ type ClockPanelProps = {
   resultReason?: string;
 };
 
-function formatClock(seconds: number): string {
+export function formatClock(seconds: number): string {
   const safeSeconds = Math.max(0, seconds);
   if (safeSeconds < 10) return `0:00.${Math.floor(safeSeconds * 10)}`;
   const whole = Math.ceil(safeSeconds);

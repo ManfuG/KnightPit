@@ -175,6 +175,8 @@ export function useChessGame(options: GameControllerOptions = {}): ChessGameCont
     const after = applyMove(before, move);
     const status = getGameStatus(after);
     const ply = moves.length + 1;
+    const nextClocks = cloneClocks(clocks);
+    if (clocked) nextClocks[mover] += timeControl.incrementSeconds;
     const record: MoveRecord = {
       ply,
       moveNumber: before.fullmoveNumber,
@@ -185,9 +187,8 @@ export function useChessGame(options: GameControllerOptions = {}): ChessGameCont
       captured: before.board[move.to] ?? (move.isEnPassant ? { color: oppositeColor(mover), type: "pawn" } : undefined),
       promotion: move.promotion,
       position: after,
+      clockSeconds: clocked ? nextClocks[mover] : undefined,
     };
-    const nextClocks = cloneClocks(clocks);
-    if (clocked) nextClocks[mover] += timeControl.incrementSeconds;
     livePositionRef.current = after;
     setPosition(after);
     setPositions((current) => [...current, after]);

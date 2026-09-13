@@ -1,13 +1,21 @@
 import type { MoveRecord } from "../../domain/chess/types";
+import { formatClock } from "./ClockPanel";
 
 type MoveListProps = {
   moves: MoveRecord[];
   viewedPly: number;
   livePly: number;
   onSelectPly: (ply: number) => void;
+  showTimes?: boolean;
 };
 
-export function MoveList({ moves, viewedPly, livePly, onSelectPly }: MoveListProps) {
+function moveTime(move: MoveRecord): string {
+  return typeof move.clockSeconds === "number" && Number.isFinite(move.clockSeconds)
+    ? formatClock(move.clockSeconds)
+    : "—";
+}
+
+export function MoveList({ moves, viewedPly, livePly, onSelectPly, showTimes = false }: MoveListProps) {
   const rows = Array.from({ length: Math.ceil(moves.length / 2) }, (_, index) => {
     const white = moves[index * 2];
     const black = moves[index * 2 + 1];
@@ -28,22 +36,24 @@ export function MoveList({ moves, viewedPly, livePly, onSelectPly }: MoveListPro
             <button
               type="button"
               className={`move-button ${white && viewedPly === white.ply ? "selected" : ""}`}
-              aria-label={`Move ${moveNumber}, White ${white?.notation ?? "not played"}`}
+              aria-label={`Move ${moveNumber}, White ${white?.notation ?? "not played"}${showTimes && white ? `, clock ${moveTime(white)}` : ""}`}
               aria-current={white && viewedPly === white.ply ? "step" : undefined}
               disabled={!white}
               onClick={() => white && onSelectPly(white.ply)}
             >
               {white?.notation ?? "—"}
+              {showTimes && white && <span className="move-time" title="Clock remaining">{moveTime(white)}</span>}
             </button>
             <button
               type="button"
               className={`move-button ${black && viewedPly === black.ply ? "selected" : ""}`}
-              aria-label={`Move ${moveNumber}, Black ${black?.notation ?? "not played"}`}
+              aria-label={`Move ${moveNumber}, Black ${black?.notation ?? "not played"}${showTimes && black ? `, clock ${moveTime(black)}` : ""}`}
               aria-current={black && viewedPly === black.ply ? "step" : undefined}
               disabled={!black}
               onClick={() => black && onSelectPly(black.ply)}
             >
               {black?.notation ?? "—"}
+              {showTimes && black && <span className="move-time" title="Clock remaining">{moveTime(black)}</span>}
             </button>
           </div>
         ))}

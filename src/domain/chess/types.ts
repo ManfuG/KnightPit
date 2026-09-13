@@ -42,6 +42,8 @@ export type MoveRecord = {
   captured?: Piece;
   promotion?: Exclude<PieceType, "king" | "pawn">;
   position: Position;
+  /** Mover's remaining seconds after increment; absent for untimed or older games. */
+  clockSeconds?: number;
 };
 
 export type GameStatus =

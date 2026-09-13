@@ -7,6 +7,7 @@ The AI is developed from scratch around a project-owned chess environment, a com
 ## Features
 
 - Play against KnightPit AI from the web interface.
+- Review completed games with each mover's remaining clock time after increment; older games without recorded times show `—`.
 - Project-owned chess rules with legal-move validation, castling, en passant, promotion, checkmate, stalemate, and draw handling.
 - CPU-only self-play, replay generation, training, evaluation, checkpoint inspection, and resumable campaigns.
 - Local FastAPI endpoints for health checks and move prediction.

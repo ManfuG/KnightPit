@@ -32,7 +32,7 @@ export function GameResult({ result, playerColor, moves, viewedPly, onNewGame, o
         <h2 id="game-result-title">{winner}</h2>
         <p className="result-reason">{reasonLabels[result.reason]}</p>
       </div>
-      <MoveList moves={moves} viewedPly={viewedPly} livePly={moves.length} onSelectPly={onSelectPly} />
+      <MoveList moves={moves} viewedPly={viewedPly} livePly={moves.length} onSelectPly={onSelectPly} showTimes />
       <Button className="w-full" variant="primary" icon="play" onClick={onNewGame}>{newGameLabel}</Button>
     </section>
   );

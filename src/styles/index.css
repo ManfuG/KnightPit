@@ -151,7 +151,9 @@ button:disabled, input:disabled, textarea:disabled, select:disabled { cursor: no
 .captured-material h2 { margin: 0 0 9px; color: var(--text-muted); font-size: .68rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
 .captured-row { display: grid; grid-template-columns: 46px minmax(0, 1fr) 22px; align-items: center; gap: 7px; min-height: 28px; }
 .captured-color { color: var(--text-muted); font-size: .68rem; }
-.captured-pieces { min-width: 0; color: var(--text-ivory); font-family: "Segoe UI Symbol", "Noto Sans Symbols 2", "Arial Unicode MS", serif; font-size: 1.16rem; letter-spacing: .08em; line-height: 1; }
+.captured-pieces { display: flex; flex-wrap: wrap; align-items: center; gap: 4px; min-width: 0; color: var(--text-ivory); font-family: "Segoe UI Symbol", "Noto Sans Symbols 2", "Arial Unicode MS", serif; font-size: 1.16rem; line-height: 1; }
+.captured-piece.piece, .palette-piece .piece { flex: 0 0 auto; width: 1em; height: 1em; }
+.captured-piece .piece-glyph, .palette-piece .piece-glyph { font-size: 1em; line-height: 1; }
 .captured-empty { color: var(--text-muted); font-size: .8rem; }
 .captured-points { color: var(--accent-gold); font-size: .72rem; text-align: right; }
 .game-controls-panel { display: flex; min-height: 0; flex: 1 1 auto; flex-direction: column; gap: 14px; padding: 19px; }
@@ -167,6 +169,7 @@ button:disabled, input:disabled, textarea:disabled, select:disabled { cursor: no
 .move-row:last-child { border-bottom: 0; }
 .move-number { padding-left: 9px; color: var(--text-muted); font-size: .7rem; }
 .move-button { min-width: 0; border: 0; background: transparent; padding: 9px 7px; color: var(--text-ivory); font-size: .73rem; text-align: left; }
+.move-time { display: block; margin-top: 3px; color: var(--text-muted); font-size: .65rem; font-variant-numeric: tabular-nums; }
 .move-button:hover, .move-button.selected { background: rgba(102, 198, 154, .14); color: var(--accent-emerald); }
 .move-list-empty { margin: 0; padding: 18px 10px; color: var(--text-muted); font-size: .75rem; text-align: center; }
 .replay-return { border: 0; background: transparent; color: var(--accent-emerald); cursor: pointer; font-size: .68rem; font-weight: 700; }
@@ -194,8 +197,9 @@ button:disabled, input:disabled, textarea:disabled, select:disabled { cursor: no
 .checkbox-choice + .checkbox-choice { margin-top: 7px; }
 .input, .textarea, .select { width: 100%; border: 1px solid var(--line); border-radius: 7px; background: rgba(10, 14, 12, .28); padding: 10px 11px; color: var(--text-ivory); font-size: .78rem; }
 .textarea { min-height: 86px; resize: vertical; }
-.piece-palette { display: grid; grid-template-columns: repeat(6, 1fr); gap: 4px; margin-top: 2px; }
-.palette-piece { display: grid; place-items: center; border: 1px solid var(--line); border-radius: 6px; background: rgba(10, 14, 12, .22); padding: 6px 1px; color: var(--text-ivory); cursor: pointer; font-family: "Segoe UI Symbol", "Noto Sans Symbols 2", "Arial Unicode MS", serif; font-size: 1.22rem; }
+.palette-field { min-width: 0; }
+.piece-palette { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 4px; margin-top: 2px; }
+.palette-piece { display: grid; min-width: 0; place-items: center; border: 1px solid var(--line); border-radius: 6px; background: rgba(10, 14, 12, .22); padding: 6px 1px; color: var(--text-ivory); cursor: pointer; font-family: "Segoe UI Symbol", "Noto Sans Symbols 2", "Arial Unicode MS", serif; font-size: 1.22rem; }
 .palette-piece[aria-pressed="true"] { border-color: var(--accent-emerald); background: rgba(102, 198, 154, .14); color: var(--accent-emerald); }
 .palette-eraser { color: var(--accent-gold); }
 .radio-row { display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px; }
