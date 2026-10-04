@@ -2,6 +2,14 @@
 
 KnightPit is an educational, open-source chess application that combines a React/TypeScript interface with a small chess AI written in Python. The project is designed to run on CPU-only hardware and to make the complete training and inference pipeline reproducible and inspectable.
 
+## See it in action
+
+[![KnightPit demo: play against the AI, review game history, and practise a custom position](media/knightpit-demo.gif)](media/knightpit-demo.mp4)
+
+**[Download the full-resolution video (MP4, 41 seconds, no audio)](https://github.com/ManfuG/KnightPit/raw/refs/heads/main/media/knightpit-demo.mp4)**
+
+The demo shows time-control selection, a live game against the AI, move-by-move replay with recorded clock times, and a custom FEN training position ending in checkmate. The animated preview plays directly in the README; the MP4 includes chapter captions. Recorded with the untrained `development-seed-42` model: this demonstrates the interface, not playing strength.
+
 The AI is developed from scratch around a project-owned chess environment, a compact NumPy policy/value network, CPU MCTS with PUCT, and self-play training. A local FastAPI service exposes model inference to the frontend. The browser client sends FEN positions and UCI move history, then validates every response against its own legal-move engine before changing the local game state.
 
 ## Features
