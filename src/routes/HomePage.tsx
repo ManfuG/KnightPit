@@ -1,6 +1,7 @@
 import { motion, useReducedMotion } from "motion/react";
 import { Link } from "react-router-dom";
 import { Icon, type IconName } from "../components/ui/Icon";
+import { AtelierOrnament } from "../components/layout/AtelierOrnament";
 
 const destinations: Array<{ to: string; label: string; icon: IconName }> = [
   { to: "/play", label: "Play", icon: "play" },
@@ -14,8 +15,11 @@ export function HomePage() {
   return (
     <>
       <motion.section className="hero" initial={shouldReduceMotion ? false : { opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: shouldReduceMotion ? 0 : .45 }}>
-        <h1>KnightPit</h1>
-        <p className="hero-description">A local chess atelier for AI play, position training, and replayable games. The CPU-only AI combines a compact policy/value network with Monte Carlo Tree Search, trained from its own self-play.</p>
+        <div className="hero-copy">
+          <h1>KnightPit</h1>
+          <p className="hero-description">A local chess atelier for AI play, position training, and replayable games. The CPU-only AI combines a compact policy/value network with Monte Carlo Tree Search, trained from its own self-play.</p>
+        </div>
+        <AtelierOrnament className="hero-ornament" />
       </motion.section>
 
       <section aria-label="Workspace destinations">

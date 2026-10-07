@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import { motion, useReducedMotion } from "motion/react";
 import { NavLink, useLocation } from "react-router-dom";
 import { Icon, type IconName } from "../ui/Icon";
+import { AtelierOrnament } from "./AtelierOrnament";
 
 export const PRODUCT_NAME = "Knight Pit";
 
@@ -53,6 +54,7 @@ export function AppShell({ children }: { children: ReactNode }) {
           <p className="brand-subtitle">A focused chess atelier</p>
           <p className="nav-label">Workspace</p>
           <Navigation />
+          <AtelierOrnament className="sidebar-ornament" />
         </aside>
 
         <div className="main-area">

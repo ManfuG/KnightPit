@@ -4,11 +4,11 @@ KnightPit is an educational, open-source chess application that combines a React
 
 ## See it in action
 
-[![KnightPit demo: play against the AI, review game history, and practise a custom position](media/knightpit-demo.gif)](media/knightpit-demo.mp4)
+[![KnightPit redesigned demo: blue-ink home, live AI game, clocked history replay, and custom-position checkmate](media/knightpit-demo.gif)](media/knightpit-demo.mp4)
 
-**[Download the full-resolution video (MP4, 41 seconds, no audio)](https://github.com/ManfuG/KnightPit/raw/refs/heads/main/media/knightpit-demo.mp4)**
+**[Download the full-resolution video (MP4, 31 seconds, no audio)](media/knightpit-demo.mp4)**
 
-The demo shows time-control selection, a live game against the AI, move-by-move replay with recorded clock times, and a custom FEN training position ending in checkmate. The animated preview plays directly in the README; the MP4 includes chapter captions. Recorded with the untrained `development-seed-42` model: this demonstrates the interface, not playing strength.
+The demo shows the redesigned home, time-control selection, a live game against the AI, move-by-move replay with recorded clock times, and a custom FEN training position ending in checkmate. The animated preview plays directly in the README. Recorded from the running production build with the untrained `development-seed-42` model: this demonstrates the interface, not playing strength.
 
 The AI is developed from scratch around a project-owned chess environment, a compact NumPy policy/value network, CPU MCTS with PUCT, and self-play training. A local FastAPI service exposes model inference to the frontend. The browser client sends FEN positions and UCI move history, then validates every response against its own legal-move engine before changing the local game state.
 
@@ -25,6 +25,7 @@ The AI is developed from scratch around a project-owned chess environment, a com
 ## Technology
 
 - **Frontend:** React, TypeScript, React Router, Motion, Tailwind CSS, and Vite.
+- **Visual identity:** blue ink, warm ivory, amber and icy blue; self-hosted Syne headings and Fraunces reading text, rounded panels, and non-interactive orbital/botanical ornaments. The interface continues the portfolio and QuantaPit design language without changing application copy or chess rules.
 - **AI service:** Python 3.10–3.13, NumPy, FastAPI, and Uvicorn.
 - **Testing:** pytest, FastAPI TestClient, and deterministic smoke scenarios.
 
@@ -145,6 +146,8 @@ npm run build
 ```
 
 The CI workflow runs the backend tests, deterministic self-play, the publication audit, and the frontend production build. A separate Ubuntu/Windows startup job runs `npm ci` and `npm run test:startup` against an isolated source checkout without local environments, checkpoints, or `.env` files. It exercises automatic installation, loaded health, legal inference, offline reuse, deterministic checkpoint generation, failure recovery, and overrides.
+
+The visual redesign was exercised in Chromium: live legal AI replies, clock increments, resignation, persisted history after reload, keyboard replay, custom-FEN checkmate, and queen promotion ending in checkmate. The original Home, Play setup, Training setup and empty History text snapshots remained unchanged. Desktop and mobile layouts were inspected, including a 320px result view without horizontal overflow.
 
 ## Licensing and attribution
 

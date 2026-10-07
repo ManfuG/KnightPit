@@ -30,6 +30,15 @@ Direct packages resolved in `package-lock.json` (version, license, role, provena
 
 The lockfile also resolves transitive build/runtime packages. The following non-MIT licenses are called out explicitly and remain applicable: `caniuse-lite@1.0.30001809` CC-BY-4.0 (browser data), `lightningcss@1.32.0` and its platform packages MPL-2.0 (CSS compiler), `baseline-browser-mapping@2.11.18` Apache-2.0, `detect-libc@2.1.2` Apache-2.0, `electron-to-chromium@1.5.412` ISC, `graceful-fs@4.2.11` ISC, `lru-cache@5.1.1` ISC, `picocolors@1.1.1` ISC, `semver@6.3.1` ISC, `yallist@3.1.1` ISC, `source-map-js@1.2.1` BSD-3-Clause, and `tslib@2.8.1` 0BSD. Other resolved transitive packages are identified by name, version, integrity hash, and registry URL in `package-lock.json`; their upstream license metadata is not collapsed to MIT.
 
+## Bundled font assets
+
+Syne and Fraunces are self-hosted under `public/fonts/` and retain the SIL Open Font License 1.1, not the project MIT license.
+
+| Asset | Copyright / upstream | License |
+| --- | --- | --- |
+| `syne-variable.ttf` | Copyright 2017 The Syne Project Authors — https://gitlab.com/bonjour-monde/fonderie/syne-typeface | [Syne-OFL.txt](public/fonts/Syne-OFL.txt) |
+| `fraunces-latin.woff2`, `fraunces-italic-latin.woff2` | Copyright 2018 The Fraunces Project Authors — https://github.com/undercasetype/Fraunces | [Fraunces-OFL.txt](public/fonts/Fraunces-OFL.txt) |
+
 
 ## Python inventory
 
