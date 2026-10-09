@@ -1,10 +1,16 @@
-export function AtelierOrnament({ className = "" }: { className?: string }) {
+import { useId } from "react";
+import { useReducedMotion } from "motion/react";
+
+export function AtelierOrnament({ className = "", orbiting = false }: { className?: string; orbiting?: boolean }) {
+  const id = useId();
+  const shouldReduceMotion = useReducedMotion();
+  const animate = orbiting && !shouldReduceMotion;
   return (
     <svg className={`atelier-ornament ${className}`} viewBox="0 0 440 420" fill="none" aria-hidden="true" focusable="false">
       <g className="ornament-orbits">
-        <ellipse cx="232" cy="195" rx="178" ry="72" transform="rotate(-28 232 195)" />
-        <ellipse cx="232" cy="195" rx="144" ry="116" transform="rotate(36 232 195)" />
-        <circle cx="232" cy="195" r="91" />
+        <path id={`${id}-outer`} d="M410 195a178 72 0 1 0-356 0a178 72 0 1 0 356 0" transform="rotate(-28 232 195)" />
+        <path id={`${id}-middle`} d="M376 195a144 116 0 1 0-288 0a144 116 0 1 0 288 0" transform="rotate(36 232 195)" />
+        <path id={`${id}-inner`} d="M323 195a91 91 0 1 0-182 0a91 91 0 1 0 182 0" />
         <path d="M232 87v216M124 195h216" strokeDasharray="2 9" />
       </g>
       <g className="ornament-leaves">
@@ -15,9 +21,28 @@ export function AtelierOrnament({ className = "" }: { className?: string }) {
         <path d="M65 393c48-14 103-9 143 10" />
       </g>
       <g className="ornament-stars">
-        <circle cx="74" cy="207" r="5" />
-        <circle cx="352" cy="109" r="7" />
-        <circle cx="287" cy="266" r="4" />
+        {orbiting ? <>
+          <g transform="rotate(-28 232 195)">
+            <g transform={animate ? undefined : "translate(410 195)"}>
+              <circle r="5" />
+              {animate && <animateMotion dur="32s" begin="-7s" repeatCount="indefinite"><mpath href={`#${id}-outer`} /></animateMotion>}
+            </g>
+          </g>
+          <g transform="rotate(36 232 195)">
+            <g transform={animate ? undefined : "translate(232 79)"}>
+              <circle r="7" />
+              {animate && <animateMotion dur="26s" begin="-16s" repeatCount="indefinite"><mpath href={`#${id}-middle`} /></animateMotion>}
+            </g>
+          </g>
+          <g transform={animate ? undefined : "translate(232 286)"}>
+            <circle r="4" />
+            {animate && <animateMotion dur="19s" begin="-4s" repeatCount="indefinite"><mpath href={`#${id}-inner`} /></animateMotion>}
+          </g>
+        </> : <>
+          <circle cx="74" cy="207" r="5" />
+          <circle cx="352" cy="109" r="7" />
+          <circle cx="287" cy="266" r="4" />
+        </>}
         <path d="m232 176 5 14 14 5-14 5-5 14-5-14-14-5 14-5ZM363 289l3 8 8 3-8 3-3 8-3-8-8-3 8-3ZM92 105l2 6 6 2-6 2-2 6-2-6-6-2 6-2Z" />
       </g>
       <g className="ornament-satellites">

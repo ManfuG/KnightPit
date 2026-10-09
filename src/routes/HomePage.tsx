@@ -19,7 +19,7 @@ export function HomePage() {
           <h1>KnightPit</h1>
           <p className="hero-description">A local chess atelier for AI play, position training, and replayable games. The CPU-only AI combines a compact policy/value network with Monte Carlo Tree Search, trained from its own self-play.</p>
         </div>
-        <AtelierOrnament className="hero-ornament" />
+        <AtelierOrnament className="hero-ornament" orbiting />
       </motion.section>
 
       <section aria-label="Workspace destinations">

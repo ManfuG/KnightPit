@@ -26,6 +26,7 @@ The AI is developed from scratch around a project-owned chess environment, a com
 
 - **Frontend:** React, TypeScript, React Router, Motion, Tailwind CSS, and Vite.
 - **Visual identity:** blue ink, warm ivory, amber and icy blue; self-hosted Syne headings and Fraunces reading text, rounded panels, and non-interactive orbital/botanical ornaments. The interface continues the portfolio and QuantaPit design language without changing application copy or chess rules.
+  The home star has three bodies orbiting along its visible SVG tracks at different speeds. Only the home ornament is animated; the sidebar decoration stays static, and reduced-motion preferences show stationary bodies on those tracks.
 - **AI service:** Python 3.10–3.13, NumPy, FastAPI, and Uvicorn.
 - **Testing:** pytest, FastAPI TestClient, and deterministic smoke scenarios.
 
