@@ -37,7 +37,7 @@ async function waitForHealth(url) {
     }
     await new Promise((resolve) => setTimeout(resolve, 250));
   }
-  throw new Error(`AI health check failed at ${url}/health: ${detail}.\n${remoteAiUrl ? "Start the configured AI service with a loaded checkpoint, or remove VITE_AI_URL from your shell/.env files for local bootstrap." : "Check the API error above and free the configured API port."}\nRetry: npm run dev\nFrontend only: npm run dev:frontend`);
+  throw new Error(`AI health check failed at ${url}/health: ${detail}.\n${remoteAiUrl ? "Start the configured AI service with a loaded checkpoint, or remove VITE_AI_URL from your shell/.env files for local bootstrap." : "Check the API error above and free the configured API port."}\nRetry: npm run dev:research\nFrontend only: npm run dev`);
 }
 
 try {
@@ -50,12 +50,12 @@ try {
       stdio: "inherit",
     });
     ai.once("error", (error) => {
-      console.error(`Unable to start KnightPitAI: ${error.message}\nRun: npm run bootstrap\nThen: npm run dev`);
+      console.error(`Unable to start KnightPitAI: ${error.message}\nRun: npm run bootstrap\nThen: npm run dev:research`);
       void shutdown(1);
     });
     ai.once("exit", (code) => {
       if (!shuttingDown) {
-        console.error(`KnightPitAI exited with code ${code ?? "unknown"}. Check the API error above.\nRetry: npm run dev`);
+        console.error(`KnightPitAI exited with code ${code ?? "unknown"}. Check the API error above.\nRetry: npm run dev:research`);
         void shutdown(code || 1);
       }
     });
@@ -72,6 +72,6 @@ try {
     frontend.printUrls();
   }
 } catch (error) {
-  console.error(`${error.message}\nAfter correcting the error, run: npm run dev`);
+  console.error(`${error.message}\nAfter correcting the error, run: npm run dev:research`);
   await shutdown(1);
 }

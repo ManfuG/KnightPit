@@ -27,7 +27,7 @@ function commandText(command, args) {
 function run(python, args, message) {
   const result = spawnSync(python.command, [...python.args, ...args], { cwd: root, env: aiEnv, stdio: "inherit" });
   if (result.error || result.status !== 0) {
-    throw new Error(`${message}${result.error ? `: ${result.error.message}` : ""}\nRun from the repository root:\n${commandText(python.command, [...python.args, ...args])}\nThen retry: npm run dev`);
+    throw new Error(`${message}${result.error ? `: ${result.error.message}` : ""}\nRun from the repository root:\n${commandText(python.command, [...python.args, ...args])}\nThen retry: npm run dev:research`);
   }
 }
 
@@ -54,7 +54,7 @@ function preparePython() {
   }
   if (!base) {
     const install = process.platform === "win32" ? "winget install --exact --id Python.Python.3.13" : process.platform === "darwin" ? "brew install python@3.13" : "sudo apt-get install python3 python3-venv python3-pip";
-    throw new Error(`Python 3.10–3.13 with venv and pip is required by the CPU lockfile.\nInstall it (${process.platform === "linux" ? "Debian/Ubuntu" : process.platform}): ${install}\nOpen a new terminal, then run: npm run dev`);
+    throw new Error(`Python 3.10–3.13 with venv and pip is required by the CPU lockfile.\nInstall it (${process.platform === "linux" ? "Debian/Ubuntu" : process.platform}): ${install}\nOpen a new terminal, then run: npm run dev:research`);
   }
   if (!probe(local, supportedPython)) {
     console.log("Creating KnightPitAI/.venv (no activation required)...");
@@ -86,13 +86,13 @@ export function bootstrap() {
   const checkpoint = override ? resolve(root, override) : candidates.find(existsSync) ?? developmentCheckpoint;
   const clearOverride = process.platform === "win32" ? "Remove-Item Env:KNIGHTPIT_CHECKPOINT -ErrorAction SilentlyContinue" : "unset KNIGHTPIT_CHECKPOINT";
   if (override && !existsSync(checkpoint)) {
-    throw new Error(`KNIGHTPIT_CHECKPOINT does not exist: ${checkpoint}\nCorrect its path, or use the development model:\n${clearOverride}\nnpm run dev`);
+    throw new Error(`KNIGHTPIT_CHECKPOINT does not exist: ${checkpoint}\nCorrect its path, or use the development model:\n${clearOverride}\nnpm run dev:research`);
   }
   const python = preparePython();
   const args = [join(aiRoot, "tools", "prepare_checkpoint.py"), checkpoint];
   if (!override && checkpoint === developmentCheckpoint) args.push("--create");
   const recovery = override ? clearOverride : commandText(process.execPath, ["-e", `require('node:fs').renameSync(${JSON.stringify(checkpoint)}, ${JSON.stringify(`${checkpoint}.invalid-${Date.now()}`)})`]);
-  run(python, args, `Checkpoint preparation failed. Existing checkpoints are never overwritten. To keep the file and fall back to a development model, run:\n${recovery}\nnpm run dev`);
+  run(python, args, `Checkpoint preparation failed. Existing checkpoints are never overwritten. To keep the file and fall back to a development model, run:\n${recovery}\nnpm run dev:research`);
   return { python, checkpoint };
 }
 

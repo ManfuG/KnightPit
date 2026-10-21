@@ -1,0 +1,40 @@
+Stockfish.js 19.0.1 — unmodified lite single-threaded WASM distribution
+
+Engine copyright: Stockfish contributors; Stockfish.js (c) 2026 Chess.com, LLC.
+See AUTHORS.txt for contributor credits and COPYING.txt for the GNU General
+Public License version 3. This engine is not covered by KnightPit's MIT license.
+
+Pinned release: https://github.com/nmrugg/stockfish.js/releases/tag/v19.0.1
+Source tag commit: 0d5dd7944f88c817c07a26bc4fb1905d5f9c46d6
+
+Unmodified release binaries:
+https://github.com/nmrugg/stockfish.js/releases/download/v19.0.1/stockfish-19-lite-single.js
+https://github.com/nmrugg/stockfish.js/releases/download/v19.0.1/stockfish-19-lite-single.wasm
+
+Corresponding source is distributed here, not only linked upstream:
+stockfish.js-v19.0.1-source.tgz contains the complete same-release repository,
+including C++ engine source, Emscripten glue, build scripts, upstream notices,
+and package metadata. Downloaded from:
+https://codeload.github.com/nmrugg/stockfish.js/tar.gz/refs/tags/v19.0.1
+Only the filename extension is changed to .tgz, preserving downloaded bytes;
+Android AAPT automatically expands and renames .gz assets otherwise.
+
+The exact evaluation network embedded in the lite binary is also included as
+nn-61e7af4bb97d.nnue (Chris Bao / sscg13). Its full SHA-256 is recorded in
+SHA256SUMS, and its prefix matches the source's EvalFileLiteName. Downloaded from:
+https://tests.stockfishchess.org/api/nn/nn-61e7af4bb97d.nnue
+Network provenance: https://tests.stockfishchess.org/nns?network_name=nn-61e7af4bb97d
+Stockfish networks are distributed under the same GPLv3 terms as the engine.
+
+To rebuild this flavor, extract the source archive, copy the adjacent
+nn-61e7af4bb97d.nnue into the extracted src/ directory, install Emscripten 6.0.9
+(as required by this release's build.js) and its standard build prerequisites,
+then run from the extracted source root:
+  npm install --ignore-scripts
+  node build.js --lite --single-threaded --no-split -f --strict-em-check
+
+The build tools are not required to run the bundled engine. Source and network
+files are provided for GPL source availability and are not loaded at runtime.
+Keep this directory, source archive, network, license and attribution together
+when redistributing the engine, including static websites and Android packages.
+The SHA256SUMS file identifies each unmodified downloaded artifact.

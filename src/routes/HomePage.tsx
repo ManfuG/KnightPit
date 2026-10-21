@@ -17,7 +17,7 @@ export function HomePage() {
       <motion.section className="hero" initial={shouldReduceMotion ? false : { opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: shouldReduceMotion ? 0 : .45 }}>
         <div className="hero-copy">
           <h1>KnightPit</h1>
-          <p className="hero-description">A local chess atelier for AI play, position training, and replayable games. The CPU-only AI combines a compact policy/value network with Monte Carlo Tree Search, trained from its own self-play.</p>
+          <p className="hero-description">Offline chess with Stockfish, a training board, and your game history.</p>
         </div>
         <AtelierOrnament className="hero-ornament" orbiting />
       </motion.section>
@@ -35,6 +35,7 @@ export function HomePage() {
           ))}
         </div>
       </section>
+      <a className="licenses-link" href={`${import.meta.env.BASE_URL}THIRD_PARTY_LICENSES.txt`}>Licenses</a>
     </>
   );
 }

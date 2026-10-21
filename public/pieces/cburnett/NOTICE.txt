@@ -1,0 +1,8 @@
+Cburnett chess pieces — Colin M. L. Burnett.
+Copyright Colin M. L. Burnett. GNU GPL version 2 or later; see COPYING.txt.
+Twelve unmodified SVG source files from Lichess lila revision
+f68e0464648bb6ad16f6bf3ee476c6c49dbead41, public/piece/cburnett/.
+https://github.com/lichess-org/lila/tree/f68e0464648bb6ad16f6bf3ee476c6c49dbead41/public/piece/cburnett
+License attribution: https://github.com/lichess-org/lila/blob/f68e0464648bb6ad16f6bf3ee476c6c49dbead41/COPYING.md
+The SVG files are the preferred editable form and are distributed with the app.
+No Lichess or Chess.com logos, branding, or proprietary artwork is included.

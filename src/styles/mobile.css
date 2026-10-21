@@ -1,0 +1,70 @@
+/* Native Android already consumes system-bar, cutout and keyboard insets. */
+html.android { --mobile-bottom: 0px; }
+@media (max-width: 900px) {
+  :root { --mobile-bottom: env(safe-area-inset-bottom, 0px); }
+  .header-mobile { position: static; min-height: 48px; padding: 6px 12px; }
+  .mobile-nav { position: static; flex: none; min-height: 56px; border-radius: 0; border-width: 1px 0 0; padding: 3px 6px calc(3px + var(--mobile-bottom)); box-shadow: none; }
+  .mobile-nav .nav-link { min-height: 48px; gap: 2px; padding: 5px 2px; }
+  .main-area { display: flex; min-height: 100dvh; flex-direction: column; padding-bottom: 0; }
+  .main-inner { flex: 1; padding: 16px 12px 24px; }
+  .main-area:has(.game-layout, .game-setup, .training-continuation) { height: 100dvh; }
+  .main-inner:has(.game-layout, .game-setup, .training-continuation) { display: flex; min-height: 0; padding: 6px 10px; }
+  .main-inner:has(.game-layout, .game-setup, .training-continuation) > div { display: flex; width: 100%; min-height: 0; flex-direction: column; gap: 6px; }
+  .main-inner:has(.game-layout, .game-setup, .training-continuation) .page-header { flex: none; margin: 0; }
+  .main-inner:has(.game-layout, .game-setup, .training-continuation) .page-header h1 { display: none; }
+  .main-inner:has(.game-layout, .game-setup, .training-continuation) .eyebrow { margin: 0; font-size: .65rem; }
+  .game-layout, .training-continuation { display: flex; flex: 1; min-height: 0; flex-direction: column; gap: 6px; }
+  .game-board-stage { position: relative; border: 0; border-radius: 0; background: none; box-shadow: none; padding: 0; }
+  .game-board-stage .board-frame { width: min(100%, calc(100dvh - 300px)); }
+  .board { margin-inline: auto; }
+  .game-board-column, .training-continuation > .board-layout { flex: none; gap: 0; }
+  .game-side-column { flex: 1; min-height: 0; gap: 6px; }
+  .clock-panel { gap: 6px; }
+  .clock { padding: 6px 10px; }
+  .clock-status { display: none; }
+  .game-layout .captured-material, .training-continuation .captured-material { display: none; }
+  .game-controls-panel, .result-panel, .training-continuation > .training-controls { flex: 1; min-height: 0; padding: 8px; gap: 6px; border-radius: 12px; }
+  .game-controls-panel > p { font-size: .75rem; }
+  .move-list-panel { flex: 1; min-height: 0; gap: 2px; }
+  .game-controls-panel .move-list, .result-panel .move-list, .training-controls .move-list { flex: 1; min-height: 0; height: auto; max-height: none; }
+  .move-button { min-height: 44px; padding: 7px; }
+  .move-list-empty { padding: 6px; font-size: .75rem; }
+  .game-action-row { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4px; }
+  .game-action-row .button { padding: 7px 3px; font-size: .75rem; }
+  .training-action-row { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4px; }
+  .training-action-row .button { padding: 7px; font-size: .75rem; }
+  .promotion-chooser { position: absolute; z-index: 4; inset: 50% 0 auto; transform: translateY(-50%); margin: 0; padding: 8px; border: 1px solid var(--accent); border-radius: 12px; background: var(--bg); }
+  .promotion-chooser > span { display: none; }
+  .promotion-choice { min-width: 44px; padding: 8px; }
+  .result-heading { display: flex; align-items: baseline; flex-wrap: wrap; gap: 4px 10px; }
+  .result-heading .eyebrow { display: none; }
+  .result-heading h2 { font-size: 1.2rem; }
+  .result-reason { margin: 0; font-size: .75rem; }
+  .training-controls > .result-panel { border: 0; padding: 0; box-shadow: none; background: none; }
+  .game-setup { display: flex; flex: 1; min-height: 0; flex-direction: column; justify-content: center; gap: 12px; }
+  .setup-controls { flex-direction: row; align-items: center; justify-content: center; gap: 8px; }
+  .setup-controls > .nav-label { display: none; }
+  .play-workspace { border: 0; background: none; box-shadow: none; gap: 12px; padding: 0; }
+  .play-workspace .board { width: min(100%, calc(100dvh - 285px)); }
+  .setup-summary { justify-content: center; gap: 12px; padding: 0; }
+  .setup-summary h2 { gap: 0; font-size: 1.1rem; }
+  .setup-summary-subtitle { font-size: .75rem; }
+  .training-grid:not(.training-continuation) .piece-palette { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+  .palette-piece { min-height: 44px; font-size: 1.8rem; }
+}
+/* Short landscape keeps the board beside clocks/actions, not above them. */
+@media (max-width: 900px) and (min-aspect-ratio: 6/5) {
+  .header-mobile { display: none; }
+  .mobile-nav { min-height: 48px; padding-block: 0; }
+  .mobile-nav .nav-link { flex-direction: row; gap: 6px; min-height: 44px; }
+  .game-layout, .training-continuation { display: grid; grid-template-columns: minmax(0, 1fr) minmax(220px, 1fr); }
+  .game-board-stage .board-frame { width: min(100%, calc(100dvh - 90px)); }
+  .game-side-column { height: 100%; }
+  .play-workspace { grid-template-columns: minmax(0, 1fr) minmax(170px, .7fr); }
+  .play-workspace .board { width: min(100%, calc(100dvh - 160px)); }
+}
+/* Enlarged text and very short windows retain readable controls via scrolling. */
+@media (max-width: 900px) and (max-height: 350px) {
+  .main-area:has(.game-layout, .game-setup, .training-continuation) { height: auto; }
+  .game-controls-panel .move-list, .result-panel .move-list, .training-controls .move-list { min-height: 44px; max-height: 100px; }
+}

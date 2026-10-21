@@ -39,7 +39,7 @@ function bootstrap(directory, env = {}) {
 async function start(directory, env = {}) {
   // Exercise the public npm command, not a test-only server entry point.
   assert.ok(process.env.npm_execpath, "Run this suite with npm run test:startup");
-  const child = spawn(process.execPath, [process.env.npm_execpath, "run", "dev"], {
+  const child = spawn(process.execPath, [process.env.npm_execpath, "run", "dev:research"], {
     cwd: directory, env: { ...cleanEnv, ...env }, stdio: ["ignore", "pipe", "pipe"], detached: process.platform !== "win32",
   });
   let output = "";

@@ -1,4 +1,3 @@
-import { useEffect, useRef } from "react";
 import { ChessBoard } from "../components/chess/ChessBoard";
 import { CapturedMaterial } from "../components/chess/CapturedMaterial";
 import { ClockPanel } from "../components/chess/ClockPanel";
@@ -12,8 +11,6 @@ import type { Move } from "../domain/chess/types";
 import { useRecordCompletedGame } from "../hooks/useRecordCompletedGame";
 export function PlayPage() {
   const game = useChessVsAi({ clocked: true });
-  const boardAnchorRef = useRef<HTMLDivElement>(null);
-  const centerAfterStartRef = useRef(false);
   useRecordCompletedGame(game, "play", game.timeControl.label, game.playerColor);
   useReplayKeyboard({ phase: game.phase, stepReplay: game.stepReplay });
   const isLive = game.viewedPly === game.moves.length;
@@ -22,17 +19,6 @@ export function PlayPage() {
   const lastMove: Move | null = lastRecord ? { from: lastRecord.from, to: lastRecord.to, promotion: lastRecord.promotion } : null;
   const boardIsInteractive = game.phase === "playing" && game.position.turn === game.playerColor && game.aiStatus !== "thinking" && isLive && !game.pendingPromotion;
   const checkedKing = checkedKingSquare(viewedPosition);
-
-  useEffect(() => {
-    if (game.phase === "setup" || !centerAfterStartRef.current) return;
-    boardAnchorRef.current?.scrollIntoView({ block: "center", inline: "nearest", behavior: "auto" });
-    centerAfterStartRef.current = false;
-  }, [game.phase]);
-
-  const startGame = () => {
-    centerAfterStartRef.current = true;
-    game.startGame();
-  };
 
   if (game.phase === "setup") {
     return (
@@ -45,13 +31,9 @@ export function PlayPage() {
         <section className="game-setup" aria-label="Game setup">
           <div className="setup-controls">
             <span className="nav-label">Time control</span>
-            <div className="controls-row">
-              {TIME_CONTROLS.map((control) => (
-                <button key={control.label} type="button" className="time-control" aria-pressed={game.timeControl.label === control.label} onClick={() => game.setTimeControl(control.label)}>
-                  {control.label}
-                </button>
-              ))}
-            </div>
+            <select className="select time-control-select" aria-label="Time control" value={game.timeControl.label} onChange={(event) => game.setTimeControl(event.target.value as typeof game.timeControl.label)}>
+              {TIME_CONTROLS.map((control) => <option key={control.label} value={control.label}>{control.label}</option>)}
+            </select>
           </div>
           <Panel className="play-workspace">
             <ChessBoard
@@ -70,7 +52,7 @@ export function PlayPage() {
                 <span>{game.timeControl.label}</span>
                 <span className="setup-summary-subtitle">You vs KnightPit AI</span>
               </h2>
-              <Button variant="primary" icon="play" onClick={startGame}>Start game</Button>
+              <Button variant="primary" icon="play" onClick={() => game.startGame()}>Start game</Button>
             </div>
           </Panel>
         </section>
@@ -90,7 +72,7 @@ export function PlayPage() {
       <div className={`game-layout ${game.phase === "finished" ? "game-finished" : ""}`}>
         <div className="game-board-column">
           <Panel className="board-stage game-board-stage">
-            <div className="board-frame" ref={boardAnchorRef}>
+            <div className="board-frame">
               <ChessBoard
                 orientation={game.playerColor}
                 position={viewedPosition}

@@ -8,7 +8,9 @@
 - Audit date: 2026-08-24.
 - Python metadata interpreter: Python 3.10.4.
 
-## Resolved Python inventory
+## Selected Python inventory
+
+This table is a selected summary, not the complete resolved dependency set. See both lockfiles for all package versions and hashes, and installed wheel metadata/license files for complete distribution notices. Python wheels and environments are not shipped by the portfolio's static publisher.
 
 | Package | Version | License | Role | Upstream |
 | --- | --- | --- | --- | --- |
@@ -29,7 +31,7 @@ NumPy wheels may bundle OpenBLAS, LAPACK, libgfortran and libquadmath; their ups
 
 ## Exclusions
 
-No Stockfish code, binary, WASM, evaluation, tablebase, external game dataset, or copied dependency source is included. The chess rules, replay records, and generated campaign metrics/checkpoints are project-owned MIT artifacts when distributed, and generated outputs remain ignored by the publication rules.
+This Python research subtree includes no Stockfish code, binary, evaluation, tablebase, external game dataset or copied dependency source. The sibling application deliberately bundles a separately licensed GPLv3 Stockfish.js worker and complete corresponding source; see the repository-root inventory. No Stockfish outputs train the Python model. Project-generated research outputs remain ignored.
 
 ## Development disclosure
 

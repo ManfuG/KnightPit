@@ -55,7 +55,7 @@ export function TrainingPage() {
 
   useEffect(() => {
     if (game.phase === "setup" || !centerAfterStartRef.current) return;
-    boardAnchorRef.current?.scrollIntoView({ block: "center", inline: "nearest", behavior: "auto" });
+    if (!window.matchMedia("(max-width: 900px)").matches) boardAnchorRef.current?.scrollIntoView({ block: "center", inline: "nearest", behavior: "auto" });
     centerAfterStartRef.current = false;
   }, [game.phase]);
 

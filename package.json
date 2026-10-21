@@ -1,23 +1,39 @@
 {
   "name": "knight-pit",
   "private": true,
-  "version": "0.1.0",
+  "version": "1.0.0",
   "type": "module",
+  "engines": {
+    "node": "^22.22.2 || ^24.15.0 || >=26.0.0"
+  },
+  "overrides": {
+    "xcode": {
+      "uuid": "11.1.1"
+    }
+  },
   "scripts": {
-    "dev": "node scripts/dev.mjs",
+    "dev": "vite",
+    "dev:research": "node scripts/dev.mjs",
     "bootstrap": "node scripts/bootstrap.mjs",
     "test:startup": "node --test scripts/dev.test.mjs",
+    "test:engine": "node scripts/engine-smoke.mjs",
     "dev:frontend": "vite",
     "build": "tsc -b && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "android:sync": "npm run build && cap sync android",
+    "android:build": "npm run android:sync && cd android && ./gradlew assembleRelease",
+    "android:audit": "python3 scripts/check-android.py"
   },
   "dependencies": {
+    "@capacitor/android": "8.5.3",
+    "@capacitor/core": "8.5.3",
     "motion": "^12.23.24",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-router-dom": "^7.8.2"
   },
   "devDependencies": {
+    "@capacitor/cli": "8.5.3",
     "@tailwindcss/vite": "^4.1.13",
     "@types/react": "^19.1.12",
     "@types/react-dom": "^19.1.9",

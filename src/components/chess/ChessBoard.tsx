@@ -13,13 +13,9 @@ export type ChessBoardProps = {
 
 export type PieceGlyphType = NonNullable<Position["board"][number]>["type"];
 
-export const PIECE_GLYPHS: Record<Color, Record<PieceGlyphType, string>> = {
-  white: { king: "♔", queen: "♕", rook: "♖", bishop: "♗", knight: "♘", pawn: "♙" },
-  black: { king: "♚", queen: "♛", rook: "♜", bishop: "♝", knight: "♞", pawn: "♟" },
-};
-
 export function PieceGlyph({ type, color }: { type: PieceGlyphType; color: Color }) {
-  return <span className="piece-glyph" aria-hidden="true">{PIECE_GLYPHS[color][type]}</span>;
+  const code = type === "knight" ? "N" : type[0].toUpperCase();
+  return <img className="piece-glyph" src={`${import.meta.env.BASE_URL}pieces/cburnett/${color[0]}${code}.svg`} alt="" draggable={false} />;
 }
 
 const files = ["a", "b", "c", "d", "e", "f", "g", "h"];
