@@ -130,6 +130,8 @@ npm run test:startup
 python3 scripts/check-android.py android/app/build/outputs/apk/release/app-release.apk
 ```
 
+Release **[1.0.1](https://github.com/ManfuG/KnightPit/releases/tag/v1.0.1)** passed source CI and signed Android release checks. The downloaded public APK was installed and exercised in airplane mode on an API 36 emulator: entry/swipe, filled board and actual Stockfish moves. All 30 public assets and 34 build files match byte-for-byte, including engine source/licenses. Mobile portrait/landscape gameplay and production browser history/replay were exercised; physical-device performance and a full accessibility audit are not claimed.
+
 ## Licensing and attribution
 
 Original application/research code remains MIT. Stockfish.js is GPLv3; Cburnett SVG pieces are GPLv2-or-later; bundled fonts are SIL OFL 1.1; adapted Taurus artwork is CC BY 4.0. Complete corresponding engine source, exact evaluation network, editable SVG sources, licenses, copyright notices and provenance ship in every build/APK. Keep those assets together when redistributing. See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md), [runtime notices](public/THIRD_PARTY_LICENSES.txt) and [LICENSE](LICENSE).

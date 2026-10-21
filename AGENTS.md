@@ -34,3 +34,9 @@
 
 - Initial `v1.0.0` workflow reached the signed Gradle step but failed with exit126: tracked `android/gradlew` lacked executable Git mode. Local wrapper was executable, so local builds had passed. Fixed the tracked index mode with `git update-index --chmod=+x`, not a runtime workaround. Keep `v1.0.0` immutable; publish corrected version1.0.1/code2 under a new tag.
 - Corrected signed APK also exercised in actual native landscape: board beside clocks, moves and all three actions; no page scrolling. Home/background then resume after human e2e4 returned to the same game without replaying entry, and Stockfish replied e7e5. Original system rotation settings restored afterward.
+
+## Publication completed
+
+- Corrected immutable release `v1.0.1` at application source commit `9c02f07f0433bdd0a65794df3c39f466734c3ebe`: https://github.com/ManfuG/KnightPit/releases/tag/v1.0.1. Source CI `39667178125` and signed release workflow `39667181483` both passed, including Ubuntu/Windows research startup, Python tests/self-play, real engine smoke and native build/integrity checks.
+- Public APK: 6,143,736 bytes; SHA256 `1e117cc13f783374e5d0ede741ff002b40cad66430c0705e589dec9131ff17b0`. Downloaded actual release assets, verified SHA256SUMS and unchanged signing certificate, checked all 30 source and 34 build files against the public APK, installed it over the local signed build and actually exercised entry/swipe/Play/Stockfish e2e4 in airplane mode.
+- Closed #10 as fixed and #2 as superseded, not fulfillment of the old optional-backend plan. #1/#4 remain open with scoped evidence; #11 delivery completed. No hosted portfolio deployment or sibling source edits. Subsequent publication-record commit is documentation-only; application release/tag stays unchanged.
