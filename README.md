@@ -2,13 +2,24 @@
 
 KnightPit is an offline-first chess application for Android and the browser, built with React/TypeScript and a bundled Stockfish 19.0.1 WebAssembly worker. The original CPU-only Python AI remains a separate, reproducible research project in `KnightPitAI/`; it no longer controls application games.
 
-## See it in action
+[![PitVerse](https://img.shields.io/badge/PitVerse-suite-75dbca)](https://giacomo-manfucci.pages.dev/pitverse/)
+[![Release](https://img.shields.io/github/v/release/ManfuG/KnightPit)](https://github.com/ManfuG/KnightPit/releases/latest)
 
-[![KnightPit redesigned demo: blue-ink home, live AI game, clocked history replay, and custom-position checkmate](media/knightpit-demo.gif)](media/knightpit-demo.mp4)
+## Try and download
 
-**[Download the full-resolution video (MP4, 31 seconds, no audio)](media/knightpit-demo.mp4)**
+**[Download KnightPit for Android — KnightPit-Android.apk](https://github.com/ManfuG/KnightPit/releases/latest/download/KnightPit-Android.apk)**
 
-The demo shows the redesigned home, time-control selection, a live game against the AI, move-by-move replay with recorded clock times, and a custom FEN training position ending in checkmate. The animated preview plays directly in the README. Recorded from the running production build with the untrained `development-seed-42` model: this demonstrates the interface, not playing strength.
+[Play the web demo](https://giacomo-manfucci.pages.dev/projects/knightpit/) · [Latest release and checksums](https://github.com/ManfuG/KnightPit/releases/latest)
+
+Current release: **[1.0.2](https://github.com/ManfuG/KnightPit/releases/tag/v1.0.2)** (Android version code 3), with orbital launcher icons and security-tooling updates. Android bundles offline startup assets; the website needs network access to load initially.
+
+## Demo
+
+[![KnightPit desktop demo: actual Stockfish play and completed-game replay](media/knightpit-demo.webp)](https://github.com/ManfuG/KnightPit/raw/refs/heads/main/media/knightpit-demo.mp4)
+
+**[Watch or download the desktop demo (MP4, 32 seconds, no audio)](https://github.com/ManfuG/KnightPit/raw/refs/heads/main/media/knightpit-demo.mp4)**
+
+Recorded from the current production browser build at 1440×1000: Home → Play, Stockfish as White plays e2-e4, human Black replies e7-e5, and Stockfish responds g1-f3. Black resigns; History opens the completed game for clocked move replay. This is the bundled Stockfish opponent, not the separate Python research model. The thumbnail is a frame from the same session.
 
 Current Play uses the unmodified Stockfish.js **lite single-thread** build with embedded NNUE: one worker, a 16 MiB hash table and clock-aware thinking capped at 1.2 seconds per move. No Python, backend, runtime download, account, SharedArrayBuffer or cross-origin isolation is required. KnightPit's own rules validate every returned move. Reset, navigation and backgrounding cancel work; obsolete responses cannot move a new game. No device-specific Elo rating is claimed.
 
@@ -17,7 +28,7 @@ Current Play uses the unmodified Stockfish.js **lite single-thread** build with 
 - Play against bundled Stockfish on Android or in a modern browser.
 - Review completed games with each mover's remaining clock time after increment; older games without recorded times show `—`.
 - Project-owned chess rules with legal-move validation, castling, en passant, promotion, checkmate, stalemate, and draw handling.
-- CPU-only self-play, replay generation, training, evaluation, checkpoint inspection, and resumable campaigns.
+- Custom-position training board and continuation play.
 - Filled white/black Cburnett SVG pieces, independent of system chess fonts.
 - Portfolio-style swipe-to-open Android entry in KnightPit's navy, gold and mineral palette.
 - Single-screen mobile gameplay: board, clocks, actions and internally scrolling move history; landscape uses side-by-side controls.
@@ -130,7 +141,7 @@ npm run test:startup
 python3 scripts/check-android.py android/app/build/outputs/apk/release/app-release.apk
 ```
 
-Release **[1.0.1](https://github.com/ManfuG/KnightPit/releases/tag/v1.0.1)** passed source CI and signed Android release checks. The downloaded public APK was installed and exercised in airplane mode on an API 36 emulator: entry/swipe, filled board and actual Stockfish moves. All 30 public assets and 34 build files match byte-for-byte, including engine source/licenses. Mobile portrait/landscape gameplay and production browser history/replay were exercised; physical-device performance and a full accessibility audit are not claimed.
+Historical **[1.0.1](https://github.com/ManfuG/KnightPit/releases/tag/v1.0.1)** verification: source CI and signed Android release checks passed. The downloaded public APK was installed and exercised in airplane mode on an API 36 emulator: entry/swipe, filled board and actual Stockfish moves. All 30 public assets and 34 build files matched byte-for-byte, including engine source/licenses. Mobile portrait/landscape gameplay and production browser history/replay were exercised. These are historical checks, not hosted CI results for 1.0.2; the current release's scoped evidence is recorded below. Physical-device performance and a full accessibility audit are not claimed.
 
 ## Licensing and attribution
 

@@ -24,7 +24,7 @@ PUBLIC_BINARY_ASSETS = {
     "public/fonts/syne-variable.ttf": "public/fonts/Syne-OFL.txt",
     "public/fonts/fraunces-latin.woff2": "public/fonts/Fraunces-OFL.txt",
     "public/fonts/fraunces-italic-latin.woff2": "public/fonts/Fraunces-OFL.txt",
-    "media/knightpit-demo.gif": "README.md",
+    "media/knightpit-demo.webp": "README.md",
     "media/knightpit-demo.mp4": "README.md",
 }
 ENGINE_ROOT = FRONTEND / "public" / "engine" / "stockfish-19.0.1"
@@ -89,8 +89,8 @@ def main() -> int:
                 findings.append(f"missing attribution for binary asset: {relative}")
             elif relative.parts[0] == "public" and "SIL OPEN FONT LICENSE" not in notice.read_text(encoding="utf-8"):
                 findings.append(f"invalid font attribution: {relative}")
-            elif relative.parts[0] == "media" and "Recorded from the running production build" not in notice.read_text(encoding="utf-8"):
-                findings.append(f"missing demo provenance: {relative}")
+            elif relative.parts[0] == "media" and relative.as_posix() not in notice.read_text(encoding="utf-8"):
+                findings.append(f"undocumented demo asset: {relative}")
             continue
         if suffix in FORBIDDEN_SUFFIXES:
             findings.append(f"forbidden binary/archive: {relative}")

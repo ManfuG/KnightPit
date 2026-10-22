@@ -56,3 +56,10 @@
 - Existing portfolio deployment updated to https://1a33af31.giacomo-manfucci.pages.dev; stable site favicons match source bytes. Source and locally verified signed release are published directly to avoid redundant CI, with `[skip ci]`; broader existing issues remain open.
 - Fresh-checkout research startup regression also passed under the installed Python3.13.16 after the first run correctly rejected system Python3.14. Use `PATH=$HOME/.local/share/uv/python/cpython-3.13.16-linux-x86_64-gnu/bin:$PATH npm run test:startup`; no research-source change was needed.
 - Published immutable [v1.0.2](https://github.com/ManfuG/KnightPit/releases/tag/v1.0.2) at source commit `224c0d5`. APK6,144,192 bytes, SHA256 `3fcf804d7a7fd45517886c141c1d5d03f1e7185da519999746bdae5b87109f7b`; existing certificate unchanged. GitHub asset digests match local APK/checksum/certificate. Documentation-only record follows the tag.
+
+## PitVerse README alignment — 2026-10-22
+
+- README now shares the PitVerse/release-badge, Try and download, Demo opening; latest is1.0.2/code3. Prominent APK/web/release links and GitHub `pitverse`/`knightpit` plus platform/chess topics. Older1.0.1 CI evidence is explicitly historical; no new APK/tag.
+- Replaced obsolete development-seed-42 demo with authentic existing production Stockfish web footage at1440×1000: Home→Play, engine White e2-e4, human e7-e5, engine g1-f3, resignation, History/replay. Raw Chromium avoids Worker instrumentation. Silent H264/yuv420p MP432.05s/595,782 bytes; same-session WebP poster replaces obsolete GIF.
+- Publication audit now allows the WebP instead of GIF and requires the actual approved media path to be documented in README, not an incidental English sentence. The actual publication command passed; engine/source/font/wrapper safeguards remain.
+- GitHub GFM render, APK redirect200, full media decode and actual Chromium video playback/end were checked. Runtime/research code and user data untouched; no new build/full test campaign.
