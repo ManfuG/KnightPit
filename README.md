@@ -54,7 +54,7 @@ Completed games stay on the device. Browser and Android storage are separate; un
 
 ## Run the browser app
 
-Requires Node.js **22.22.2+**, **24.15+**, or **26+**, following `package.json`/`.nvmrc`. Install dependencies once:
+Requires Node.js **22.23.4+ (22.x)**, **24.22.1+ (24.x)**, or **26.12.1+ (26.x)**, following `package.json`/`.nvmrc`. Install dependencies once:
 
 ```sh
 npm ci
@@ -141,3 +141,7 @@ This project was developed with **GPT-5.6-Luna** using **Oh My Pi** as the codin
 ## Scope and limitations
 
 Stockfish's lite single-thread flavor deliberately trades the full engine's larger network/multithread throughput for mobile memory use and deployment compatibility. Strength depends on hardware and the bounded thinking time; there is no certified app Elo. The independent NumPy/MCTS project remains research software, not the application opponent.
+
+## 1.0.2 — suite alignment and security
+
+Adds a tilted orbital ring to the existing favicon/native launcher glyphs, including adaptive, monochrome and legacy variants. Updated affected Vite/source-map-js development tooling and Node floors for the [October security releases](https://nodejs.org/en/blog/vulnerability/october-2026-security-releases). Clean install/npm audit reports zero known findings. Production/embedded builds, real WASM legality/cancellation smoke, signed Android assembly and the 30-source/34-build asset audit passed. Chromium played e2e4/e7e5; the same-key API 36 update displays the orbital knight. Engine, rules and storage remain unchanged. The locally verified APK is published directly without duplicate hosted CI.
