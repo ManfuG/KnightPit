@@ -142,6 +142,6 @@ This project was developed with **GPT-5.6-Luna** using **Oh My Pi** as the codin
 
 Stockfish's lite single-thread flavor deliberately trades the full engine's larger network/multithread throughput for mobile memory use and deployment compatibility. Strength depends on hardware and the bounded thinking time; there is no certified app Elo. The independent NumPy/MCTS project remains research software, not the application opponent.
 
-## 1.0.2 — suite alignment and security
+## [1.0.2](https://github.com/ManfuG/KnightPit/releases/tag/v1.0.2) — suite alignment and security
 
 Adds a tilted orbital ring to the existing favicon/native launcher glyphs, including adaptive, monochrome and legacy variants. Updated affected Vite/source-map-js development tooling and Node floors for the [October security releases](https://nodejs.org/en/blog/vulnerability/october-2026-security-releases). Clean install/npm audit reports zero known findings. Production/embedded builds, real WASM legality/cancellation smoke, signed Android assembly and the 30-source/34-build asset audit passed. Chromium played e2e4/e7e5; the same-key API 36 update displays the orbital knight. Engine, rules and storage remain unchanged. The locally verified APK is published directly without duplicate hosted CI.
