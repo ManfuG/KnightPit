@@ -74,6 +74,8 @@ npm run dev
 
 Open **http://localhost:5173**, select Play and Start game. Ctrl+C stops Vite. Python/checkpoints are not needed. `npm run build` produces `dist/`; serve it with `npm run preview` or any static server. Assets honor Vite's base path for embedded deployments. A static website needs its files available/cached to load; Android guarantees bundled offline startup without a service worker.
 
+The browser sidebar and mobile header link back to [PitVerse](https://giacomo-manfucci.pages.dev/pitverse/); Android hides these website links. Integrated production build and browser layout checks passed at 320/390/980/1280px without horizontal overflow. No engine, stored-game or APK change.
+
 **[Play on the portfolio website](https://giacomo-manfucci.pages.dev/projects/knightpit/)** — the same bundled Stockfish engine runs in the browser, with no Python/API connection. Loading the website initially needs network access; Android bundles its startup assets. Old `VITE_AI_URL` / `VITE_AI_MODE` settings no longer configure application play.
 
 ## Build Android

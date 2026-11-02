@@ -54,12 +54,14 @@ export function AppShell({ children }: { children: ReactNode }) {
           <p className="brand-subtitle">A focused chess atelier</p>
           <p className="nav-label">Workspace</p>
           <Navigation />
+          <a className="nav-link suite-link" href="https://giacomo-manfucci.pages.dev/pitverse/">← PitVerse</a>
           <AtelierOrnament className="sidebar-ornament" />
         </aside>
 
         <div className="main-area">
           <header className="header-mobile">
             <Brand />
+            <a className="nav-link suite-link" href="https://giacomo-manfucci.pages.dev/pitverse/">← PitVerse</a>
           </header>
           <main id="main-content" className="main-inner" tabIndex={-1}>
             <motion.div

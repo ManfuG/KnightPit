@@ -63,3 +63,9 @@
 - Replaced obsolete development-seed-42 demo with authentic existing production Stockfish web footage at1440×1000: Home→Play, engine White e2-e4, human e7-e5, engine g1-f3, resignation, History/replay. Raw Chromium avoids Worker instrumentation. Silent H264/yuv420p MP432.05s/595,782 bytes; same-session WebP poster replaces obsolete GIF.
 - Publication audit now allows the WebP instead of GIF and requires the actual approved media path to be documented in README, not an incidental English sentence. The actual publication command passed; engine/source/font/wrapper safeguards remain.
 - GitHub GFM render, APK redirect200, full media decode and actual Chromium video playback/end were checked. Runtime/research code and user data untouched; no new build/full test campaign.
+
+## Website parent navigation
+
+- Added native PitVerse return links to the desktop sidebar and mobile header, reusing existing nav-link styling. The current Android class hides both links; bottom game navigation remains four items.
+- Portfolio lint, all integrated production builds and the 12,577-file publication audit passed. Actual browser checks at 320/390/980/1280px found exactly one visible return link and no horizontal overflow.
+- No engine, research, persistence, native release/tag or user progress changes. Publish through the existing portfolio Pages project and normal origin/main source push; unrelated issues remain open.
