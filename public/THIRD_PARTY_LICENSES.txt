@@ -891,3 +891,9 @@ GPL-2.0-or-later. Full license and editable SVG source: pieces/cburnett/COPYING.
 
 Stockfish.js 19.0.1 lite single-thread — Stockfish developers and Nathan Rugg
 GPL-3.0. Full license/authors: engine/stockfish-19.0.1/COPYING.txt and AUTHORS.txt. Complete corresponding source and build instructions: engine/stockfish-19.0.1/stockfish.js-v19.0.1-source.tgz and NOTICE.txt. Matching lite evaluation network: nn-61e7af4bb97d.nnue. These engine files retain GPL terms, not KnightPit MIT.
+
+------------------------------------------------------------------------
+
+Sora font — Copyright 2019 The Sora Project Authors
+https://github.com/sora-xor/sora-font
+SIL Open Font License 1.1. Complete copyright and license text: fonts/Sora-OFL.txt.

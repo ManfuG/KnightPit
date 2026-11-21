@@ -19,7 +19,7 @@ Current release: **[1.0.2](https://github.com/ManfuG/KnightPit/releases/tag/v1.0
 
 **[Watch or download the desktop demo (MP4, 32 seconds, no audio)](https://github.com/ManfuG/KnightPit/raw/refs/heads/main/media/knightpit-demo.mp4)**
 
-Recorded from the current production browser build at 1440×1000: Home → Play, Stockfish as White plays e2-e4, human Black replies e7-e5, and Stockfish responds g1-f3. Black resigns; History opens the completed game for clocked move replay. This is the bundled Stockfish opponent, not the separate Python research model. The thumbnail is a frame from the same session.
+Recorded before the website palette refresh at 1440×1000: Home → Play, Stockfish as White plays e2-e4, human Black replies e7-e5, and Stockfish responds g1-f3. Black resigns; History opens the completed game for clocked move replay. This remains a demonstration of the bundled Stockfish opponent, not the Python research model or the current website appearance. The thumbnail is a frame from the same session.
 
 Current Play uses the unmodified Stockfish.js **lite single-thread** build with embedded NNUE: one worker, a 16 MiB hash table and clock-aware thinking capped at 1.2 seconds per move. No Python, backend, runtime download, account, SharedArrayBuffer or cross-origin isolation is required. KnightPit's own rules validate every returned move. Reset, navigation and backgrounding cancel work; obsolete responses cannot move a new game. No device-specific Elo rating is claimed.
 
@@ -36,9 +36,9 @@ Current Play uses the unmodified Stockfish.js **lite single-thread** build with 
 
 ## Technology
 
-- **Frontend:** React, TypeScript, React Router, Motion, Tailwind CSS, and Vite.
-- **Visual identity:** blue ink, warm ivory, amber and icy blue; self-hosted Syne headings and HanPit's system sans-serif reading stack, rounded panels, and non-interactive orbital/botanical ornaments. The interface continues the portfolio and QuantaPit design language without changing application copy or chess rules.
-  The home star has three bodies orbiting along its visible SVG tracks at different speeds. Only the home ornament is animated; the sidebar decoration stays static, and reduced-motion preferences show stationary bodies on those tracks.
+- **Frontend:** React, TypeScript, React Router, Tailwind CSS, and Vite.
+- **Website visual identity:** burgundy navigation, rose-tinted paper surfaces, self-hosted Syne display/Sora interface headings and system reading text. Flat panels, restrained borders and full-width Home links follow the portfolio/PitVerse design language without changing chess rules, training controls or stored-game formats.
+  The former web ornaments, route/card entrance animations and unused Motion dependency have been removed. Native focus/pressed states, visible board-state markers and compact mobile gameplay remain. The published Android 1.0.2 APK and its entry artwork are unchanged; this website refresh is not a new APK release.
 - **Android:** Capacitor 8.5.3, native system/cutout/keyboard insets, stable app-private `https://localhost` origin.
 - **Research:** Python 3.10–3.13, NumPy, FastAPI, Uvicorn and pytest.
 
@@ -136,6 +136,8 @@ npm run build
 ```
 
 CI retains Python tests/self-play and isolated Ubuntu/Windows research-startup checks, alongside the Android jobs. `npm run test:engine` runs the actual bundled WASM through legal White/Black history, forced mate and cancellation/restart; no downloaded/reference engine or mocked prediction is used.
+
+Website UI verification (2026-11-21): Home, Play, Training Board and History were exercised in isolated Chromium at desktop, tablet and narrow-phone sizes. Live play fit 320×640, 390×844, 844×390 and 1440×900 without document scrolling. Keyboard pawn selection/movement, real Stockfish replies, resignation, persisted history after reload, keyboard replay opening, invalid-FEN feedback and two-sided training continuation passed. Mobile history uses larger text and explicit column proportions. Reduced motion was verified at page load, and forced-colors selection retained a visible outline. This is scoped browser evidence, not a complete screen-reader audit or a new native release.
 
 ```sh
 npm run test:engine

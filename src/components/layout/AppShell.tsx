@@ -1,8 +1,6 @@
 import type { ReactNode } from "react";
-import { motion, useReducedMotion } from "motion/react";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { Icon, type IconName } from "../ui/Icon";
-import { AtelierOrnament } from "./AtelierOrnament";
 
 export const PRODUCT_NAME = "Knight Pit";
 
@@ -13,16 +11,16 @@ type NavigationItem = {
 };
 
 const navigation: NavigationItem[] = [
-  { to: "/", label: "Home", icon: "spark" },
+  { to: "/", label: "Home", icon: "board" },
   { to: "/play", label: "Play", icon: "play" },
-  { to: "/training", label: "Training Board", icon: "board" },
+  { to: "/training", label: "Training Board", icon: "target" },
   { to: "/history", label: "History", icon: "history" },
 ];
 
 function Brand() {
   return (
     <NavLink to="/" className="brand" aria-label={`${PRODUCT_NAME} home`}>
-      <span className="brand-mark"><Icon name="spark" width={17} height={17} /></span>
+      <img className="brand-mark" src={`${import.meta.env.BASE_URL}favicon.svg`} width="35" height="35" alt="" />
       <span className="brand-name">{PRODUCT_NAME}</span>
     </NavLink>
   );
@@ -42,20 +40,14 @@ function Navigation({ mobile = false }: { mobile?: boolean }) {
 }
 
 export function AppShell({ children }: { children: ReactNode }) {
-  const location = useLocation();
-  const shouldReduceMotion = useReducedMotion();
-
   return (
     <div className="app-background">
       <a className="skip-link" href="#main-content">Skip to content</a>
       <div className="shell">
         <aside className="sidebar" aria-label={`${PRODUCT_NAME} sidebar`}>
           <Brand />
-          <p className="brand-subtitle">A focused chess atelier</p>
-          <p className="nav-label">Workspace</p>
           <Navigation />
           <a className="nav-link suite-link" href="https://giacomo-manfucci.pages.dev/pitverse/">← PitVerse</a>
-          <AtelierOrnament className="sidebar-ornament" />
         </aside>
 
         <div className="main-area">
@@ -64,14 +56,7 @@ export function AppShell({ children }: { children: ReactNode }) {
             <a className="nav-link suite-link" href="https://giacomo-manfucci.pages.dev/pitverse/">← PitVerse</a>
           </header>
           <main id="main-content" className="main-inner" tabIndex={-1}>
-            <motion.div
-              key={location.pathname}
-              initial={shouldReduceMotion ? false : { opacity: 0, y: 7 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.3, ease: "easeOut" }}
-            >
-              {children}
-            </motion.div>
+            <div>{children}</div>
           </main>
           <Navigation mobile />
         </div>

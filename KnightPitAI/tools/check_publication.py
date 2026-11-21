@@ -22,6 +22,7 @@ PRIVATE_PATH = re.compile(r"(?:[A-Za-z]:[\\/]+Users[\\/]|/Users/|/home/)", re.IG
 DOC_NAMES = {"readme.md", "third_party_notices.md", "license"}
 PUBLIC_BINARY_ASSETS = {
     "public/fonts/syne-variable.ttf": "public/fonts/Syne-OFL.txt",
+    "public/fonts/sora-latin.woff2": "public/fonts/Sora-OFL.txt",
     "public/fonts/fraunces-latin.woff2": "public/fonts/Fraunces-OFL.txt",
     "public/fonts/fraunces-italic-latin.woff2": "public/fonts/Fraunces-OFL.txt",
     "media/knightpit-demo.webp": "README.md",

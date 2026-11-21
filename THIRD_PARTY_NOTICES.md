@@ -19,7 +19,6 @@ Direct packages resolved in `package-lock.json` (version, license, role, provena
 | react | 19.2.8 | MIT | UI runtime | https://registry.npmjs.org/react |
 | react-dom | 19.2.8 | MIT | DOM renderer | https://registry.npmjs.org/react-dom |
 | react-router-dom | 7.18.2 | MIT | routing | https://registry.npmjs.org/react-router-dom |
-| motion | 12.43.0 | MIT | animation | https://registry.npmjs.org/motion |
 | @tailwindcss/vite | 4.3.3 | MIT | Tailwind Vite plugin | https://registry.npmjs.org/@tailwindcss/vite |
 | tailwindcss | 4.3.3 | MIT | CSS tooling | https://registry.npmjs.org/tailwindcss |
 | @vitejs/plugin-react | 5.2.0 | MIT | Vite React plugin | https://registry.npmjs.org/@vitejs/plugin-react |
@@ -33,11 +32,12 @@ The lockfile also resolves transitive build/runtime packages. The following non-
 
 ## Bundled font assets
 
-Syne and Fraunces are self-hosted under `public/fonts/` and retain the SIL Open Font License 1.1, not the project MIT license.
+Syne, Sora and the legacy Fraunces assets are self-hosted under `public/fonts/` and retain the SIL Open Font License 1.1, not the project MIT license.
 
 | Asset | Copyright / upstream | License |
 | --- | --- | --- |
 | `syne-variable.ttf` | Copyright 2017 The Syne Project Authors — https://gitlab.com/bonjour-monde/fonderie/syne-typeface | [Syne-OFL.txt](public/fonts/Syne-OFL.txt) |
+| `sora-latin.woff2` | Copyright 2019 The Sora Project Authors — https://github.com/sora-xor/sora-font | [Sora-OFL.txt](public/fonts/Sora-OFL.txt) |
 | `fraunces-latin.woff2`, `fraunces-italic-latin.woff2` | Copyright 2018 The Fraunces Project Authors — https://github.com/undercasetype/Fraunces | [Fraunces-OFL.txt](public/fonts/Fraunces-OFL.txt) |
 
 

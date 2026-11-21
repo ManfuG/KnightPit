@@ -23,7 +23,7 @@ html.android { --mobile-bottom: 0px; }
   .clock { padding: 6px 10px; }
   .clock-status { display: none; }
   .game-layout .captured-material, .training-continuation .captured-material { display: none; }
-  .game-controls-panel, .result-panel, .training-continuation > .training-controls { flex: 1; min-height: 0; padding: 8px; gap: 6px; border-radius: 12px; }
+  .game-controls-panel, .result-panel, .training-continuation > .training-controls { flex: 1; min-height: 0; padding: 8px; gap: 6px; border-radius: var(--radius-panel); }
   .game-controls-panel > p { font-size: .75rem; }
   .move-list-panel { flex: 1; min-height: 0; gap: 2px; }
   .game-controls-panel .move-list, .result-panel .move-list, .training-controls .move-list { flex: 1; min-height: 0; height: auto; max-height: none; }
@@ -33,7 +33,7 @@ html.android { --mobile-bottom: 0px; }
   .game-action-row .button { padding: 7px 3px; font-size: .75rem; }
   .training-action-row { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4px; }
   .training-action-row .button { padding: 7px; font-size: .75rem; }
-  .promotion-chooser { position: absolute; z-index: 4; inset: 50% 0 auto; transform: translateY(-50%); margin: 0; padding: 8px; border: 1px solid var(--accent); border-radius: 12px; background: var(--bg); }
+  .promotion-chooser { position: absolute; z-index: 4; inset: 50% 0 auto; transform: translateY(-50%); margin: 0; padding: 8px; border: 1px solid var(--accent); border-radius: var(--radius-control); background: var(--bg); }
   .promotion-chooser > span { display: none; }
   .promotion-choice { min-width: 44px; padding: 8px; }
   .result-heading { display: flex; align-items: baseline; flex-wrap: wrap; gap: 4px 10px; }
